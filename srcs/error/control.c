@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 18:28:42 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/08/15 16:44:06 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/08/15 17:57:37 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
-int	main(int ac, char **av)
+bool	errmsg(char *error)
 {
-	t_cud	cud;
-	t_map	map;
-
-	if (ac == 2)
-	{
-		ft_memset(&cud, '\0', sizeof(cud));
-		ft_memset(&map, '\0', sizeof(map));
-		cud.map = &map;
-		if (file_pasring(av[1], &cud))
-			return(EXIT_FAILURE);
-	}
+	if (error)
+		ft_printf(2, "cub3D Error: %s\n", error);
 	else
-		return (errmsg(ARGERR));
-	return (0);
+		ft_printf(2, "cub3D Error\n");
+	return (EXIT_FAILURE);
 }

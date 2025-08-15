@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   file_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 18:28:42 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/08/15 18:27:56 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
-int	main(int ac, char **av)
+bool	file_is_dir(char *input)
 {
-	t_cud	cud;
-	t_map	map;
-
-	if (ac == 2)
-	{
-		ft_memset(&cud, '\0', sizeof(cud));
-		ft_memset(&map, '\0', sizeof(map));
-		cud.map = &map;
-		if (file_pasring(av[1], &cud))
-			return(EXIT_FAILURE);
-	}
-	else
-		return (errmsg(ARGERR));
-	return (0);
+	(void) input;
+	return (true);
 }
+
+bool	file_pasring(char *av, t_cud *cud)
+{
+	if(!av || !av[0])
+		return(errmsg(INPERR));
+	cud->input = ft_strdup(av);
+	if (!cud->input)
+		return(errmsg(MALLERR));
+	return(EXIT_SUCCESS);
+}
+
+

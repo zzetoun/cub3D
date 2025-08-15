@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 18:28:42 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/08/15 15:46:59 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/08/15 18:25:44 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#ifndef CUB3D_STRUCT_H
+# define CUB3D_STRUCT_H
 
-int	main(int ac, char **av)
+# include <stdbool.h>
+
+typedef struct s_map
 {
-	t_cud	cud;
-	t_map	map;
+	int		**colors;
+	char	*north_dir;
+	char	*south_dir;
+	char	*west_dir;
+	char	*east_dir;
+	char	*floor_c;
+	char	*celing_c;
+	bool	valid_map;
+	
+} t_map;
 
-	if (ac == 2)
-	{
-		ft_memset(&cud, '\0', sizeof(cud));
-		ft_memset(&map, '\0', sizeof(map));
-		cud.map = &map;
-		if (file_pasring(av[1], &cud))
-			return(EXIT_FAILURE);
-	}
-	else
-		return (errmsg(ARGERR));
-	return (0);
-}
+typedef struct s_cud
+{
+	char	*input;
+	t_map	*map;
+} t_cud;
+
+#endif

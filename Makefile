@@ -10,8 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = cub3d
-NAME_BONUS  = cub3d_bonus
+NAME        = cub3D
 
 SRC_DIR     = srcs
 UTIL_DIR	= $(SRC_DIR)/utils
@@ -47,7 +46,10 @@ NC      = \033[0m
 # -------------------------
 # Explicit source files
 # -------------------------
-SRCS = cub3d.c
+SRCS = cub3d.c \
+		error/control.c \
+		parsing/file_parsing.c \
+		
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 
 OBJS = $(SRCS:.c=.o)
@@ -57,8 +59,6 @@ OBJS = $(SRCS:.c=.o)
 # -------------------------
 
 all: $(NAME)
-
-bonus: $(NAME_BONUS)
 
 # Build libft
 $(LIBFT_LIB):
@@ -110,4 +110,4 @@ sanitize: re
 # -------------------------
 # Phony targets
 # -------------------------
-.PHONY: all bonus clean fclean re sanitize
+.PHONY: all clean fclean re sanitize
