@@ -48,8 +48,8 @@ NC      = \033[0m
 # -------------------------
 SRCS = cub3d.c \
 		error/control.c \
-		parsing/file_parsing.c \
-		
+		parser/file_parsing.c \
+
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 
 OBJS = $(SRCS:.c=.o)

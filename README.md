@@ -21,9 +21,9 @@ Developed as part of the 42 Abu Dhabi curriculum, this project blends low-level 
 cub3D/
 ├── src/            # Source code
 │   ├── libft/      # Custom libft library (lives inside src/)
-│   ├── game/       # Game logic and ray casting
+│   ├── mlx/        # mlx library
 │   ├── parser/     # Map parsing and validation
-│   └── render/     # Rendering functions
+│   └── error/      # Error handle
 ├── include/        # Header files
 ├── textures/       # Wall textures (e.g., XPM)
 ├── maps/           # Example .cub scene files
