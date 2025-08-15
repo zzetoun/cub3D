@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:08:21 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/05/07 18:08:24 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/15 15:20:05 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*_src;
-	unsigned char	*_dst;
-	size_t			i;
+	const unsigned char	*_src;
+	unsigned char		*_dst;
+	size_t				i;
 
 	if (!dst && !src)
 		return (NULL);

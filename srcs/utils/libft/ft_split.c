@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:06:49 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/01 19:57:57 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/15 15:29:46 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ char	**ft_split(const char *s, char c)
 {
 	char	**sp_str;
 	int		i;
-	int		all_spaces;
+	bool	all_spaces;
 
 	if (!s)
 		return (NULL);
-	all_spaces = 1;
+	all_spaces = true;
 	i = -1;
 	while (s[++i])
 		if (s[i] != ' ')
-			all_spaces = 0;
+			all_spaces = false;
 	if (!s[0] || all_spaces)
 	{
 		sp_str = ft_calloc(2, sizeof(char *));
