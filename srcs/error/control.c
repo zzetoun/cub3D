@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 16:44:06 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 13:04:23 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 13:21:43 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	freedom(t_cud *cud)
 {
-	if (cud && cud->file > 0)
+	if (cud && cud->file_fd > 0)
 	{
-		close(cud->file);
-		cud->file = -1;
+		close(cud->file_fd);
+		cud->file_fd = -1;
 	}
 }
 

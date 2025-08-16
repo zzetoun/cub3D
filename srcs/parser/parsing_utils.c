@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 12:37:28 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 13:31:15 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/08/16 13:10:17 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/08/16 13:13:44 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
+#include "cub3d.h"
 
-char	*gnl(int fd, char **tmp);
-char	*ft_read_file(char *buff, int fd);
-char	*ft_line(char *buff);
-char	*ft_remain(char *buff);
-
-#endif
+bool	line_is_space(char *line)
+{
+	int	idx;
+	
+	if(!line)
+		return(false);
+	idx = 0;
+	while(ft_isspace(line[idx]))
+		idx++;
+	if (ft_strlen(line) == idx + 1)
+		return(true);
+	return(false);
+}

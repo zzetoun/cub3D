@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 12:38:49 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 12:20:11 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 14:13:27 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,16 @@ char	*ft_read_file(char *buff, int fd)
 	return (buff);
 }
 
-char	*gnl(int fd)
+char	*gnl(int fd, char **tmp)
 {
 	static char	*buff;
 	char		*line;
 
+	if (tmp && *tmp)
+	{
+		free((*tmp));
+		*tmp = NULL;
+	}
 	if (fd < 0 || BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
 	buff = ft_read_file(buff, fd);
@@ -103,5 +108,10 @@ char	*gnl(int fd)
 	if (!line)
 		return (free(buff), buff = NULL, NULL);
 	buff = ft_remain(buff);
+	if (buff && *buff == '\0')
+	{
+		free(buff);
+		buff = NULL;
+	}
 	return (line);
 }

@@ -6,14 +6,14 @@
 #    By: zzetoun <zzetoun@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 13:30:00 by zzetoun           #+#    #+#              #
-#    Updated: 2025/08/15 14:00:00 by zzetoun          ###   ########.fr        #
+#    Updated: 2025/08/16 14:50:00 by zzetoun          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
 
 SRC_DIR     = srcs
-UTIL_DIR	= $(SRC_DIR)/utils
+UTIL_DIR    = $(SRC_DIR)/utils
 LIBFT_DIR   = $(UTIL_DIR)/libft
 LIBFT_LIB   = $(LIBFT_DIR)/libft.a
 
@@ -47,8 +47,8 @@ NC      = \033[0m
 # Explicit source files
 # -------------------------
 SRCS = cub3d.c \
-		error/control.c \
-		parser/file_parsing.c \
+       error/control.c \
+       parser/file_parsing.c \
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 
@@ -60,23 +60,25 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-# Build libft
-$(LIBFT_LIB):
+# Always ensure libft is built when requested
+.PHONY: libft
+libft:
 	@echo "$(CYAN)Building libft...$(NC)"
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
-# Build mlx
-$(MLX_LIB):
+# Always ensure mlx is built when requested
+.PHONY: mlx
+mlx:
 	@echo "$(CYAN)Building mlx...$(NC)"
 	@$(MAKE) --no-print-directory -C $(MLXOS)
 
-# Build main executable
-$(NAME): $(OBJS) $(LIBFT_LIB) $(MLX_LIB)
+# Main program depends on objects + libs
+$(NAME): $(OBJS) libft mlx
 	@echo "$(GREEN)Linking $(NAME)...$(NC)"
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLXFLAGS) -o $(NAME)
 
-# Build bonus executable
-$(NAME_BONUS): $(OBJS) $(LIBFT_LIB) $(MLX_LIB)
+# Bonus (same as main, can be expanded later)
+$(NAME_BONUS): $(OBJS) libft mlx
 	@echo "$(GREEN)Linking $(NAME_BONUS)...$(NC)"
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLXFLAGS) -o $(NAME_BONUS)
 

@@ -111,3 +111,13 @@ Error
 
 ## License
 This project is part of the 42 Network curriculum and is provided for educational purposes.
+
+---
+
+## Add X11 for linux
+
+apt-get install -y libx11-dev libxext-dev
+
+## Valgrind Test script
+
+valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./cub3D <directory/filename>
