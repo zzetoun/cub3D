@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 13:59:51 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 16:00:17 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 
 bool	errmsg(char *details, char *error);
 bool	file_pasring(char *av, t_cud *cud);
+
+void	ft_free_array(char **array);
+void	freedom(t_cud *cud);
 
 # define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
 # define INPERR "no file input"

@@ -5,113 +5,98 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 12:38:49 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 14:13:27 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/03/14 17:14:49 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/08/16 17:16:36 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char	*ft_remain(char *buff)
+static void	move_buffer(char *buffer)
 {
-	char	*remain;
-	int		idx;
-	int		jdx;
-
-	idx = 0;
-	while (buff[idx] && buff[idx] != '\n')
-		idx++;
-	if (!buff[idx])
-		return (free(buff), buff = NULL, NULL);
-	remain = ft_calloc(ft_strlen(buff) + 1 - idx++, sizeof(char));
-	if (!remain)
-		return (free(buff), buff = NULL, NULL);
-	jdx = 0;
-	while (buff[idx])
-		remain[jdx++] = buff[idx++];
-	remain[jdx] = '\0';
-	free(buff);
-	buff = NULL;
-	return (remain);
+	if (ft_strchr(buffer, '\n'))
+		ft_memmove(buffer, (ft_strchr(buffer, '\n') + 1),
+			ft_strlen(ft_strchr(buffer, '\n') + 1) + 1);
+	else
+		buffer[0] = 0;
 }
 
-char	*ft_line(char *buff)
+static char	*join_buf(char *result, char *buffer)
 {
 	char	*line;
-	int		len;
 
-	if (!ft_strlen(buff))
-		return (NULL);
-	len = 0;
-	while (buff[len] && buff[len] != '\n')
-		len++;
-	if (buff[len] == '\n')
-		line = ft_calloc(len + 2, sizeof(char));
-	else
-		line = ft_calloc(len + 1, sizeof(char));
-	if (!line)
-		return (NULL);
-	if (buff[len] == '\n')
-		line[len + 1] = '\0';
-	else
-		line[len] = '\0';
-	while (len >= 0)
+	if (result == NULL)
 	{
-		line[len] = buff[len];
-		len--;
-	}
-	return (line);
-}
-
-char	*ft_read_file(char *buff, int fd)
-{
-	char	*line;
-	int		len;
-
-	line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!line)
-		return (free(buff), buff = NULL, NULL);
-	len = 1;
-	while (!ft_strchr(buff, '\n') && len != 0)
-	{
-		len = read(fd, line, BUFFER_SIZE);
-		if (len < 0)
-		{
-			free(line);
-			free(buff);
-			buff = NULL;
+		result = ft_calloc(1, sizeof(char));
+		if (result == NULL)
 			return (NULL);
-		}
-		line[len] = '\0';
-		buff = ft_strjoin(buff, line);
 	}
-	free(line);
-	return (buff);
-}
-
-char	*gnl(int fd, char **tmp)
-{
-	static char	*buff;
-	char		*line;
-
-	if (tmp && *tmp)
+	line = ft_strjoin_gl(result, buffer);
+	if (line == NULL)
 	{
-		free((*tmp));
-		*tmp = NULL;
-	}
-	if (fd < 0 || BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX)
+		free(result);
 		return (NULL);
-	buff = ft_read_file(buff, fd);
-	if (!buff)
-		return (NULL);
-	line = ft_line(buff);
-	if (!line)
-		return (free(buff), buff = NULL, NULL);
-	buff = ft_remain(buff);
-	if (buff && *buff == '\0')
-	{
-		free(buff);
-		buff = NULL;
 	}
+	free(result);
+	move_buffer(buffer);
 	return (line);
 }
+
+char	*ft_strjoin_gl(char *result, char *buffer)
+{
+	char	*new;
+	size_t	i;
+	int		j;
+
+	i = 0;
+	j = -1; 
+	if(!result || !buffer)
+		return (NULL);
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] && buffer[i] == '\n')
+		i++;
+	new = ft_calloc(ft_strlen(result) + i + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (result[++j])
+		new[j] = result[j];
+	while (buffer[i] && buffer[i] != '\n')
+		new[j++] = buffer[i++];
+	if (buffer[i] && buffer[i] == '\n')
+		new[j++] = buffer[i++];
+	new[j] = '\0';
+	return (new);
+}
+
+char	*gnl(int fd)
+{
+	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1u];
+	char		*ret;
+	ssize_t		bytes;
+
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE > INT_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
+	ret = NULL;
+	while (ret == NULL || !ft_strchr(ret, '\n'))
+	{
+		if (!*buffer[fd])
+		{
+			bytes = read(fd, buffer[fd], BUFFER_SIZE);
+			if (bytes == 0)
+				return (ret);
+			if (bytes < 0 && ret)
+				free(ret);
+			if (bytes < 0)
+				return (NULL);
+			buffer[fd][bytes] = '\0';
+		}
+		ret = join_buf(ret, buffer[fd]);
+		if (ret == NULL)
+			return (NULL);
+	}
+	return (ret);
+}
+
+   
