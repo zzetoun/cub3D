@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 18:29:23 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 12:56:49 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@
 # include <string.h>
 # include <sys/time.h>
 
-bool	errmsg(char *error);
+bool	errmsg(char *details, char *error);
 bool	file_pasring(char *av, t_cud *cud);
 
 # define ARGERR "Nubers of Arguments only 1 ./cub3D file_name"
 # define INPERR "no file input"
 # define MALLERR "malloc error :an unexpected error occured"
+# define FILEEMPTY "file is empty"
 
 #endif

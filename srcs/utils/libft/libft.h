@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:20:08 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 15:29:32 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 12:10:36 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include "display/ft_printf.h"
+# include "gnl/get_next_line.h"
 
 typedef struct s_list
 {

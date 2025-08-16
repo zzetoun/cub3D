@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:46:59 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 18:25:44 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 12:54:05 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_map
 
 typedef struct s_cud
 {
-	char	*input;
+	int		file;
 	t_map	*map;
 } t_cud;
 

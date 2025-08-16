@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/15 18:28:42 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 12:36:59 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int ac, char **av)
 			return(EXIT_FAILURE);
 	}
 	else
-		return (errmsg(ARGERR));
+		return (errmsg(ARGERR, NULL));
 	return (0);
 }

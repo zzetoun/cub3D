@@ -6,53 +6,54 @@
 #    By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 17:24:30 by zzetoun           #+#    #+#              #
-#    Updated: 2025/08/15 18:11:59 by zzetoun          ###   ########.fr        #
+#    Updated: 2025/08/16 12:21:07 by zzetoun          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS	= ft_array_len.c		\
-		  ft_bzero.c			\
-		  ft_calloc.c			\
-		  ft_strdup.c			\
-		  ft_memset.c			\
-		  ft_memchr.c			\
-		  ft_memcpy.c			\
-		  ft_memmove.c			\
-		  ft_memcmp.c			\
-		  ft_strncmp.c			\
-		  ft_strlen.c			\
-		  ft_strlcpy.c			\
-		  ft_strlcat.c			\
-		  ft_strchr.c			\
-		  ft_strnstr.c			\
-		  ft_strrchr.c			\
-		  ft_atoi.c				\
-		  ft_isalpha.c			\
-		  ft_isupper.c			\
-		  ft_toupper.c			\
-		  ft_islower.c			\
-		  ft_tolower.c			\
-		  ft_isdigit.c			\
-		  ft_isalnum.c			\
-		  ft_isascii.c			\
-		  ft_isprint.c			\
-		  ft_isspace.c			\
-		  ft_strjoin.c			\
-		  ft_strjoin_free.c		\
-		  ft_strtrim.c			\
-		  ft_substr.c			\
-		  ft_split.c			\
-		  ft_str_tolower.c		\
-		  ft_itoa.c				\
-		  ft_putchar_fd.c		\
-		  ft_putstr_fd.c		\
-		  ft_putendl_fd.c		\
-		  ft_putnbr_fd.c		\
-		  ft_strmapi.c			\
-		  ft_striteri.c			\
-		  ft_darray_to_str.c	\
-		  display/ft_printf.c
+SRCS	= ft_array_len.c			\
+		  ft_bzero.c				\
+		  ft_calloc.c				\
+		  ft_strdup.c				\
+		  ft_memset.c				\
+		  ft_memchr.c				\
+		  ft_memcpy.c				\
+		  ft_memmove.c				\
+		  ft_memcmp.c				\
+		  ft_strncmp.c				\
+		  ft_strlen.c				\
+		  ft_strlcpy.c				\
+		  ft_strlcat.c				\
+		  ft_strchr.c				\
+		  ft_strnstr.c				\
+		  ft_strrchr.c				\
+		  ft_atoi.c					\
+		  ft_isalpha.c				\
+		  ft_isupper.c				\
+		  ft_toupper.c				\
+		  ft_islower.c				\
+		  ft_tolower.c				\
+		  ft_isdigit.c				\
+		  ft_isalnum.c				\
+		  ft_isascii.c				\
+		  ft_isprint.c				\
+		  ft_isspace.c				\
+		  ft_strjoin.c				\
+		  ft_strjoin_free.c			\
+		  ft_strtrim.c				\
+		  ft_substr.c				\
+		  ft_split.c				\
+		  ft_str_tolower.c			\
+		  ft_itoa.c					\
+		  ft_putchar_fd.c			\
+		  ft_putstr_fd.c			\
+		  ft_putendl_fd.c			\
+		  ft_putnbr_fd.c			\
+		  ft_strmapi.c				\
+		  ft_striteri.c				\
+		  ft_darray_to_str.c		\
+		  display/ft_printf.c		\
+		  gnl/get_next_line.c			
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -84,7 +85,7 @@ bonus: ${OBJS_BO}
 	${LIBC} ${NAME} ${OBJS_BO}
 
 %.o : %.c
-	${CC} ${CFLAGS} -I. -Idisplay -c $< -o $@
+	${CC} ${CFLAGS} -I. -Idisplay -Ignl -c $< -o $@
 
 clean:
 	${RM} ${OBJS} ${OBJS_BO}
