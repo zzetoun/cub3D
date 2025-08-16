@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:20:08 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 12:10:36 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 17:33:49 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
 int		ft_atoi(const char *str);
+int		str_compare(char const *s1, char const *s2);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 

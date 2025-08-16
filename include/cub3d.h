@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 16:00:17 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/16 17:30:39 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ void	freedom(t_cud *cud);
 # define INPERR "no file input"
 # define MALLERR "malloc error :an unexpected error occured"
 # define FILEEMPTY "file is empty"
+# define CUBFILTY 	"Wrong .cub file type"
+# define CUBFILNM 	"Wrong .cub file name"
 
 #endif

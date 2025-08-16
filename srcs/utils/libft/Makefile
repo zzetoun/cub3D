@@ -6,7 +6,7 @@
 #    By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 17:24:30 by zzetoun           #+#    #+#              #
-#    Updated: 2025/08/16 12:21:07 by zzetoun          ###   ########.fr        #
+#    Updated: 2025/08/16 17:29:10 by zzetoun          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS	= ft_array_len.c			\
 		  ft_strmapi.c				\
 		  ft_striteri.c				\
 		  ft_darray_to_str.c		\
+		  str_compare.c				\
 		  display/ft_printf.c		\
 		  gnl/get_next_line.c			
 
