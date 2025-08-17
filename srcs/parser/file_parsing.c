@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   file_parsing.c                                     :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 17:39:33 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/17 11:51:46 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
@@ -19,7 +19,6 @@ bool	file_format(char *av)
 	i = ft_strlen(av) - 4;
 	if (i < 0)
 		return(errmsg(CUBFILTY, NULL));
-	ft_printf(1, "av + 4 = [%s]\n", av + i);
 	if(!str_compare(".cub", av + i))
 		return(errmsg(CUBFILNM, NULL));
 	return(0);
@@ -43,15 +42,16 @@ bool	file_to_data(t_cud *cud)
 		line = ft_strjoin_free(line, tmp);
 	}
 	cud->file_data = ft_split(line, '\n');
+	free(line);
 	if (!cud->file_data)
 		return(errmsg(MALLERR, NULL));
-	free(line);
 	return (0);
 }
 
 bool	file_pasring(char *av, t_cud *cud)
 {
 	int idx = -1;
+
 	if(!av || !av[0])
 		return(errmsg(INPERR, NULL));
 	if (file_format(av))
@@ -66,5 +66,4 @@ bool	file_pasring(char *av, t_cud *cud)
 	freedom(cud);
 	return(EXIT_SUCCESS);
 }
-
 
