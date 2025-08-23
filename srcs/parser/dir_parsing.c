@@ -6,43 +6,39 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 01:59:28 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 02:19:00 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
 
-static bool dir_validatio(char *dir)
-{
-    
-}
-
 static bool clean_and_valid_dir(char *dir)
 {
     char    *tmp;
-    size_t	start;
-    size_t	end;
+    int     start;
+    int     end;
 
     tmp = ft_strdup(dir);
     if (!tmp)
         return(errmsg(MALLERR, NULL));
     free(dir);
     start = 0;
-    while(ft_isspace(tmp[start])
+    while(ft_isspace(tmp[start]))
         start++;
     end = ft_strlen(tmp) - 1;
-    while(ft_isspace(tmp[end])
+    while(ft_isspace(tmp[end]))
         end--;
-    dir = ft_substr(tmp, star, ft_strlen(tmp) - end - start);
+    dir = ft_substr(tmp, start, ft_strlen(tmp) - end - start);
     free(tmp);
     if (!dir)
         return(errmsg(MALLERR, NULL));
-    start = ft_strlen(dir) - 4;
+    if (file_format(dir, ".xmp"))
+		return(EXIT_FAILURE);
+	start = open(dir, O_RDONLY);
 	if (start < 0)
-		return(errmsg(XMPFILTY, NULL));
-	if(!str_compare(".xmp", dir + start))
-		return(errmsg(XMPFILNM, NULL));
-	return(dir_validatio(dir));
+		return (errmsg(dir, strerror(errno)));
+    close(start);
+    return(EXIT_SUCCESS);
 }
 static bool	clean_up_dirs(t_dir *dirs)
 {
@@ -84,6 +80,6 @@ bool	fill_dir(t_cud *cud)
 			if (!ft_strncmp(f_data + j, "EA", 2) && ft_isspace(f_data[j + 2]))
 				cud->map->dirs->ea_dir = ft_strdup(f_data + j + 3);
 		}
-		return (clean_up_dir(cud->map->dirs));
 	}
+    return (clean_up_dirs(cud->map->dirs));
 }

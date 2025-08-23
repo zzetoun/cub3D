@@ -6,23 +6,11 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 02:00:15 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 02:06:46 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
-
-bool	file_format(char *av, char *format)
-{
-	int	i;
-
-	i = ft_strlen(av) - 4;
-	if (i < 0)
-		return(errmsg(CUBFILTY, NULL));
-	if(!str_compare(, av + i))
-		return(errmsg(CUBFILNM, NULL));
-	return(0);
-}
 
 bool	file_to_data(t_cud *cud)
 {
@@ -45,7 +33,7 @@ bool	file_to_data(t_cud *cud)
 	free(line);
 	if (!cud->file_data)
 		return(errmsg(MALLERR, NULL));
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 bool	file_pasring(char *av, t_cud *cud)
@@ -54,7 +42,7 @@ bool	file_pasring(char *av, t_cud *cud)
 
 	if(!av || !av[0])
 		return(errmsg(INPERR, NULL));
-	if (file_format(av))
+	if (file_format(av, ".cub"))
 		return(EXIT_FAILURE);
 	cud->file_fd = open(av, O_RDONLY);
 	if (cud->file_fd < 0)

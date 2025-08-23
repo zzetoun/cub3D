@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 01:56:03 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 02:17:07 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,9 +26,10 @@
 
 bool	errmsg(char *details, char *error);
 bool	file_pasring(char *av, t_cud *cud);
+bool	file_format(char *file, char *format);
 bool    line_is_space(char *line);
 
-void	fill_dir(t_cud *cud);
+bool	fill_dir(t_cud *cud);
 void	ft_free_array(char **array);
 void	freedom(t_cud *cud);
 
@@ -36,9 +37,7 @@ void	freedom(t_cud *cud);
 # define INPERR "no file input"
 # define MALLERR "malloc error :an unexpected error occured"
 # define FILEEMPTY "file is empty"
-# define CUBFILTY 	"Wrong .cub file type"
-# define CUBFILNM 	"Wrong .cub file name"
-# define XMPFILTY 	"Wrong .xpm file type"
-# define XMPFILNM 	"Wrong .xpm file name"
+# define FILTY 	"Wrong file type of: "
+# define FILNM 	"Wrong file nme of: "
 
 #endif
