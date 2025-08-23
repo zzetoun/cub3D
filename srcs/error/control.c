@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 16:44:06 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 16:03:08 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 01:17:11 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
@@ -28,6 +28,18 @@ void	ft_free_array(char **array)
 	array = NULL;
 }
 
+static void	free_dirs(t_dir *dirs)
+{
+	if (dirs->no_dir)
+		free(dirs->no_dir);
+	if (dirs->so_dir)
+		free(dirs->so_dir);
+	if (dirs->ea_dir)
+		free(dirs->ea_dir);
+	if (dirs->we_dir)
+		free(dirs->we_dir);
+}
+
 void	freedom(t_cud *cud)
 {
 	if (cud)
@@ -38,6 +50,8 @@ void	freedom(t_cud *cud)
 			cud->file_fd = -1;
 		}
 		ft_free_array(cud->file_data);
+		if (cud->map && cud->map->dirs)
+			free_dirs(cud->map->dirs);
 	}
 }
 

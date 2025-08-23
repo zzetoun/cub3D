@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/16 17:30:39 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 01:56:03 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -26,7 +26,9 @@
 
 bool	errmsg(char *details, char *error);
 bool	file_pasring(char *av, t_cud *cud);
+bool    line_is_space(char *line);
 
+void	fill_dir(t_cud *cud);
 void	ft_free_array(char **array);
 void	freedom(t_cud *cud);
 
@@ -36,5 +38,7 @@ void	freedom(t_cud *cud);
 # define FILEEMPTY "file is empty"
 # define CUBFILTY 	"Wrong .cub file type"
 # define CUBFILNM 	"Wrong .cub file name"
+# define XMPFILTY 	"Wrong .xpm file type"
+# define XMPFILNM 	"Wrong .xpm file name"
 
 #endif
