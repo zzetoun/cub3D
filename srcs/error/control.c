@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 16:44:06 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 01:17:11 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/25 00:17:50 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -39,20 +39,28 @@ static void	free_dirs(t_dir *dirs)
 	if (dirs->we_dir)
 		free(dirs->we_dir);
 }
+static void	free_xpms(t_xpm *xpms)
+{
+	if (xpms->no_xpm)
+		free(xpms->no_xpm);
+	if (xpms->so_xpm)
+		free(xpms->so_xpm);
+	if (xpms->ea_xpm)
+		free(xpms->ea_xpm);
+	if (xpms->we_xpm)
+		free(xpms->we_xpm);
+}
 
 void	freedom(t_cud *cud)
 {
-	if (cud)
+	if (cud->file_fd > 0)
 	{
-		if (cud->file_fd > 0)
-		{
-			close(cud->file_fd);
-			cud->file_fd = -1;
-		}
-		ft_free_array(cud->file_data);
-		if (cud->map && cud->map->dirs)
-			free_dirs(cud->map->dirs);
+		close(cud->file_fd);
+		cud->file_fd = -1;
 	}
+	ft_free_array(cud->file_data);
+	free_dirs(&cud->map.dirs);
+	free_xpms(&cud->xpms);
 }
 
 bool	errmsg(char *details, char *error)

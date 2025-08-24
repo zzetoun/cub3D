@@ -1,16 +1,22 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dir_parsing.c                                      :+:      :+:    :+:   */
+/*   xpm_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 18:32:08 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/25 00:19:40 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
+
+// static bool xpm_to_image(t_cud *cud, t_xpm *xpms)
+// {
+//     xpms->no_xpm = mlx_xpm_file_to_image(cud->mlx, cud->map->dirs->no_dir, )
+//     return ()
+// }
 
 static bool clean_and_valid_dir(char **dir_ptr)
 {
@@ -37,7 +43,7 @@ static bool clean_and_valid_dir(char **dir_ptr)
     *dir_ptr = trimmed_dir;
     return (EXIT_SUCCESS);
 }
-static bool	clean_up_dirs(t_dir *dirs)
+static bool	dir_to_xpm(t_cud *cud, t_dir *dirs)
 {
 	if (!dirs->no_dir)
         return (errmsg(DIRNULL, "North"));
@@ -55,10 +61,13 @@ static bool	clean_up_dirs(t_dir *dirs)
         return (EXIT_FAILURE);
     else if (clean_and_valid_dir(&dirs->ea_dir))
         return (EXIT_FAILURE);
+    (void) cud;
+    // if (xpm_to_image(cud, cud->xpms))
+    //     return (EXIT_FAILURE);
     return (EXIT_SUCCESS);
 }
 
-bool	fill_dir(t_cud *cud)
+bool	fill_to_dir(t_cud *cud)
 {
 	int		idx;
 	int		jdx;
@@ -74,15 +83,15 @@ bool	fill_dir(t_cud *cud)
 			jdx++;
 		if (f_data && ft_strlen(f_data) - jdx >= 7)
 		{
-			if (!ft_strncmp(f_data + jdx, "NO", 2))
-				cud->map->dirs->no_dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "SO", 2))
-				cud->map->dirs->so_dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "WE", 2))
-				cud->map->dirs->we_dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "EA", 2))
-				cud->map->dirs->ea_dir = ft_strdup(f_data + jdx + 2);
+            if (!ft_strncmp(f_data + jdx, "NO", 2) && !cud->map.dirs.no_dir)
+                cud->map.dirs.no_dir = ft_strdup(f_data + jdx + 2);
+			if (!ft_strncmp(f_data + jdx, "SO", 2) && !cud->map.dirs.so_dir)
+				cud->map.dirs.so_dir = ft_strdup(f_data + jdx + 2);
+			if (!ft_strncmp(f_data + jdx, "WE", 2) && !cud->map.dirs.we_dir)
+				cud->map.dirs.we_dir = ft_strdup(f_data + jdx + 2);
+			if (!ft_strncmp(f_data + jdx, "EA", 2) && !cud->map.dirs.ea_dir)
+				cud->map.dirs.ea_dir = ft_strdup(f_data + jdx + 2);
 		}
 	}
-    return (clean_up_dirs(cud->map->dirs));
+    return (dir_to_xpm(cud, &cud->map.dirs));
 }

@@ -1,10 +1,10 @@
-                          NO   1.xpm       
+                          NO   textures/NO/teapot.xpm
 
 
-SO./path_to_the_south_texture
+SOtextures/SO/teapot.xpm
 
 
-WE ./path_to_the_west_texture
+WE textures/WE/teapot.xpm
 
 F 220,100,0
 C 225,30,0
@@ -23,7 +23,7 @@ C 225,30,0
 
 
 
-EA ./path_to_the_east_texture
+EA textures/EA/teapot.xpm
 
 
 

@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 18:27:02 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 23:12:56 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -29,17 +29,18 @@ bool	file_pasring(char *av, t_cud *cud);
 bool	file_format(char *file, char *format);
 bool    line_is_space(char *line);
 
-bool	fill_dir(t_cud *cud);
+bool	fill_to_dir(t_cud *cud);
 void	ft_free_array(char **array);
 void	freedom(t_cud *cud);
 
 # define WHITESPACE " \t\n\v\f\r"
-# define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
+# define MLXINIERR "mlx failed to initlize"
 # define INPERR "no file input"
-# define MALLERR "malloc error :an unexpected error occured"
 # define FILEEMPTY "file is empty"
+# define FILNAME "Wrong file nme of"
+# define FILTYPE "Wrong file type of"
 # define DIRNULL "directory is empty"
-# define FILTY 	"Wrong file type of"
-# define FILNM 	"Wrong file nme of"
+# define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
+# define MALLERR "malloc error :an unexpected error occured"
 
 #endif
