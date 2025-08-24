@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 02:06:46 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 17:11:53 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -51,12 +51,12 @@ bool	file_pasring(char *av, t_cud *cud)
 		return(EXIT_FAILURE);
 	// while(cud->file_data[++idx])
 	// 	ft_printf(1, "[%d]:[%s]", idx, cud->file_data[idx]);
-	fill_dir(cud);
+	if(fill_dir(cud))
+		return(EXIT_FAILURE);
 	ft_printf(1, "no_dir: [%s]", cud->map->dirs->no_dir);
 	ft_printf(1, "so_dir: [%s]", cud->map->dirs->so_dir);
 	ft_printf(1, "we_dir: [%s]", cud->map->dirs->we_dir);
 	ft_printf(1, "ea_dir: [%s]", cud->map->dirs->ea_dir);
-	freedom(cud);
 	return(EXIT_SUCCESS);
 }
 

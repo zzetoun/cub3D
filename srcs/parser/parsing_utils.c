@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 13:10:17 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 02:16:53 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 18:35:48 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,10 +30,11 @@ bool	file_format(char *file, char *format)
 {
 	int	i;
 
-	i = ft_strlen(file) - 4;
+	i = ft_strlen(file) - ft_strlen(format);
 	if (i < 0)
 		return (errmsg(FILTY, format));
+	ft_printf(1, "foramt:[%s]\nfile: [%s]\nfile + i: [%s]\n", format, file, file + i);
 	if(!str_compare(format, file + i))
 		return (errmsg(FILNM, format));
-	return (false);
+	return (EXIT_SUCCESS);
 }

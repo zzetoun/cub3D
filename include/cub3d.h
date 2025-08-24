@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 02:17:07 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 18:27:02 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -33,11 +33,13 @@ bool	fill_dir(t_cud *cud);
 void	ft_free_array(char **array);
 void	freedom(t_cud *cud);
 
+# define WHITESPACE " \t\n\v\f\r"
 # define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
 # define INPERR "no file input"
 # define MALLERR "malloc error :an unexpected error occured"
 # define FILEEMPTY "file is empty"
-# define FILTY 	"Wrong file type of: "
-# define FILNM 	"Wrong file nme of: "
+# define DIRNULL "directory is empty"
+# define FILTY 	"Wrong file type of"
+# define FILNM 	"Wrong file nme of"
 
 #endif

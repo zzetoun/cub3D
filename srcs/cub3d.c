@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 00:24:36 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/24 17:12:36 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,7 +26,10 @@ int	main(int ac, char **av)
 		map.dirs = &dirs;
 		cud.map = &map;
 		if (file_pasring(av[1], &cud))
+		{
+			freedom(&cud);
 			return(EXIT_FAILURE);
+		}
 	}
 	else
 		return (errmsg(ARGERR, NULL));
