@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 21:33:35 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/25 00:23:29 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -47,7 +47,7 @@ bool	file_pasring(char *av, t_cud *cud)
 		return(errmsg(av, strerror(errno)));
 	if (file_to_data(cud))
 		return(EXIT_FAILURE);
-	if (fill_to_dir(cud))
+	if (fill_to_xpm(cud))
 		return(EXIT_FAILURE);
 	// if (fill_to_color(cud))
 	// 	return(EXIT_FAILURE);

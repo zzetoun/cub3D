@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/25 00:19:40 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/25 00:23:42 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -67,7 +67,7 @@ static bool	dir_to_xpm(t_cud *cud, t_dir *dirs)
     return (EXIT_SUCCESS);
 }
 
-bool	fill_to_dir(t_cud *cud)
+bool	fill_to_xpm(t_cud *cud)
 {
 	int		idx;
 	int		jdx;

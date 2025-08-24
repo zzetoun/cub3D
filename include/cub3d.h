@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/24 23:12:56 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/25 00:23:54 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -29,7 +29,7 @@ bool	file_pasring(char *av, t_cud *cud);
 bool	file_format(char *file, char *format);
 bool    line_is_space(char *line);
 
-bool	fill_to_dir(t_cud *cud);
+bool	fill_to_xpm(t_cud *cud);
 void	ft_free_array(char **array);
 void	freedom(t_cud *cud);
 
