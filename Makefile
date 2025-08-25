@@ -6,7 +6,7 @@
 #    By: zzetoun <zzetoun@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/17 12:00:00 by zzetoun           #+#    #+#              #
-#    Updated: 2025/08/17 12:00:00 by zzetoun          ###   ########.fr        #
+#    Updated: 2025/08/25 14:00:00 by zzetoun          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLXOS       = $(UTIL_DIR)/mlx/minilibx-linux
 MLX_LIB     = $(MLXOS)/libmlx.a
 MLXFLAGS    = -L$(MLXOS) -lmlx -L/usr/lib -I$(MLXOS) -lXext -lX11 -lm
 else
-MLXOS       = $(UTIL_DIR)/mlx/minilibx-macos
+MLXOS       = $(UTIL_DIR)/mlx/mlx-mac
 MLX_LIB     = $(MLXOS)/libmlx.a
 MLXFLAGS    = -L$(MLXOS) -lmlx -framework OpenGL -framework AppKit
 endif
@@ -47,13 +47,13 @@ YELLOW  = \033[0;33m
 NC      = \033[0m
 
 # -------------------------
-# Explicit source files
+# Sources
 # -------------------------
 SRCS = cub3d.c \
        error/control.c \
        parser/file_parsing.c \
-	   parser/parsing_utils.c \
-	   parser/xpm_parsing.c 
+       parser/parsing_utils.c \
+       parser/xpm_parsing.c 
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS = $(SRCS:.c=.o)
@@ -73,19 +73,11 @@ libft:
 # mlx
 .PHONY: mlx
 mlx:
-	@echo "$(CYAN)Preparing MLX...$(NC)"
-	@if [ ! -d "$(MLXOS)" ]; then \
-		echo "$(YELLOW)MLX not found, cloning...$(NC)"; \
-		if [ "$(OS_NAME)" = "Linux" ]; then \
-			git clone https://github.com/42Paris/minilibx-linux $(MLXOS); \
-		else \
-			git clone https://github.com/42Paris/minilibx-macos $(MLXOS); \
-		fi \
-	fi
+	@echo "$(CYAN)Building MLX...$(NC)"
 	@if [ -f "$(MLXOS)/Makefile" ]; then \
 		$(MAKE) --no-print-directory -C $(MLXOS); \
 	else \
-		echo "$(RED)Error: No Makefile in $(MLXOS)$(NC)"; \
+		echo "$(RED)Error: MLX not found at $(MLXOS)$(NC)"; \
 		exit 1; \
 	fi
 

@@ -33,7 +33,6 @@ bool	file_format(char *file, char *format)
 	i = ft_strlen(file) - ft_strlen(format);
 	if (i < 0)
 		return (errmsg(FILTYPE, format));
-	ft_printf(1, "Format:[%s]\nfile: [%s]\nfile + i: [%s]\n", format, file, file + i);
 	if(!str_compare(format, file + i))
 		return (errmsg(FILNAME, format));
 	return (EXIT_SUCCESS);

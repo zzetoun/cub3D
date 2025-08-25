@@ -27,5 +27,7 @@ int	main(int ac, char **av)
 		freedom(&cud);
 		return(EXIT_FAILURE);
 	}
+	// here to add excution
+	freedom(&cud);
 	return (EXIT_SUCCESS);
 }
