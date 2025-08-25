@@ -16,7 +16,7 @@ void	ft_free_array(char **array)
 {
 	int	idx;
 
-	if (!array || !*array)
+	if (!array)
 		return ;
 	idx = -1;
 	while (array[++idx])
@@ -39,16 +39,16 @@ static void	free_dirs(t_dir *dirs)
 	if (dirs->we_dir)
 		free(dirs->we_dir);
 }
-static void	free_xpms(t_xpm *xpms)
+static void	free_xpms(t_cud *cud)
 {
-	if (xpms->no_xpm)
-		free(xpms->no_xpm);
-	if (xpms->so_xpm)
-		free(xpms->so_xpm);
-	if (xpms->ea_xpm)
-		free(xpms->ea_xpm);
-	if (xpms->we_xpm)
-		free(xpms->we_xpm);
+	int	i;
+
+	i = -1;
+	while(++i < 4)
+	{
+		if (cud->xpms[i].xpm_dir)
+            mlx_destroy_image(cud->mlx, cud->xpms[i].xpm_dir);
+	}
 }
 
 void	freedom(t_cud *cud)
@@ -60,7 +60,9 @@ void	freedom(t_cud *cud)
 	}
 	ft_free_array(cud->file_data);
 	free_dirs(&cud->map.dirs);
-	free_xpms(&cud->xpms);
+	free_xpms(cud);
+	if (cud->mlx)
+		free(cud->mlx);
 }
 
 bool	errmsg(char *details, char *error)

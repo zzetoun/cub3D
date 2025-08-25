@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	cud.mlx = mlx_init();
 	if (!cud.mlx)
 		return (errmsg(MLXINIERR, NULL));
-	if (file_pasring(av[1], &cud))
+	if (file_parsing(av[1], &cud))
 	{
 		freedom(&cud);
 		return(EXIT_FAILURE);

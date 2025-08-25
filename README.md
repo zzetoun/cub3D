@@ -120,8 +120,18 @@ apt-get install -y libx11-dev libxext-dev
 
 ## Valgrind Test script
 
-valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./cub3D <directory/filename>
+apt-get update && apt-get install -y xvfb
+xvfb-run -a valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --verbose ./cub3D <directory/filename>
 
-## MLX Additional Resources
+	#ifdef __linux__
+	if (cud->mlx)
+	{
+		mlx_destroy_display(cud->mlx);
+		free(cud->mlx);
+	}
+	#endif
+
+## MLX && cub3D Additional Resources
 For further information and a guide for the 42 School Graphics Library, you can refer to this resource:
 https://qst0.github.io/ft_libgfx/
+https://harm-smits.github.io/42docs/projects/cub3d

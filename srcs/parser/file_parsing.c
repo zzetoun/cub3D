@@ -36,7 +36,7 @@ bool	file_to_data(t_cud *cud)
 	return (EXIT_SUCCESS);
 }
 
-bool	file_pasring(char *av, t_cud *cud)
+bool	file_parsing(char *av, t_cud *cud)
 {
 	if(!av || !av[0])
 		return(errmsg(INPERR, NULL));

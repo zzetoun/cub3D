@@ -12,11 +12,32 @@
 
 #include "cub3d.h"
 
-// static bool xpm_to_image(t_cud *cud, t_xpm *xpms)
-// {
-//     xpms->no_xpm = mlx_xpm_file_to_image(cud->mlx, cud->map->dirs->no_dir, )
-//     return ()
-// }
+static bool xpm_to_image(t_cud *cud)
+{
+	char	*dir;
+
+	dir = cud->map.dirs.no_dir;
+    cud->xpms[0].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[0].img_width, &cud->xpms[0].img_height);
+	if (!cud->xpms[0].xpm_dir)
+		return (errmsg(XPMERR, "North"));
+	dir = cud->map.dirs.so_dir;
+    cud->xpms[1].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[1].img_width, &cud->xpms[1].img_height);
+	if (!cud->xpms[1].xpm_dir)
+		return (errmsg(XPMERR, "South"));
+	dir = cud->map.dirs.ea_dir;
+	cud->xpms[2].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[2].img_width, &cud->xpms[2].img_height);
+	if (!cud->xpms[2].xpm_dir)
+		return (errmsg(XPMERR, "East"));
+	dir = cud->map.dirs.we_dir;
+	cud->xpms[3].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[3].img_width, &cud->xpms[3].img_height);
+	if (!cud->xpms[3].xpm_dir)
+		return (errmsg(XPMERR, "West"));
+    return (EXIT_SUCCESS);
+}
 
 static bool clean_and_valid_dir(char **dir_ptr)
 {
@@ -61,9 +82,8 @@ static bool	dir_to_xpm(t_cud *cud, t_dir *dirs)
         return (EXIT_FAILURE);
     else if (clean_and_valid_dir(&dirs->ea_dir))
         return (EXIT_FAILURE);
-    (void) cud;
-    // if (xpm_to_image(cud, cud->xpms))
-    //     return (EXIT_FAILURE);
+    if (xpm_to_image(cud))
+        return (EXIT_FAILURE);
     return (EXIT_SUCCESS);
 }
 
@@ -77,7 +97,6 @@ bool	fill_to_xpm(t_cud *cud)
 	while (cud->file_data[++idx])
 	{
 		jdx = 0;
-		idx += line_is_space(cud->file_data[idx]);
 		f_data = cud->file_data[idx];
 		while (f_data && ft_isspace(f_data[jdx]))
 			jdx++;

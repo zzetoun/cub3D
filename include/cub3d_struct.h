@@ -25,10 +25,9 @@ typedef	struct s_dir
 
 typedef struct s_xpm
 {
-	void	*no_xpm;
-	void	*so_xpm;
-	void	*we_xpm;
-	void	*ea_xpm;
+	void	*xpm_dir;
+	int		img_width;
+	int		img_height;
 } t_xpm;
 
 typedef struct s_map
@@ -46,7 +45,7 @@ typedef struct s_cud
 	char	**file_data;
 	int		file_fd;
 	t_map	map;
-	t_xpm	xpms;
+	t_xpm	xpms[4];
 } t_cud;
 
 #endif

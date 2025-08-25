@@ -25,7 +25,7 @@
 # include <sys/time.h>
 
 bool	errmsg(char *details, char *error);
-bool	file_pasring(char *av, t_cud *cud);
+bool	file_parsing(char *av, t_cud *cud);
 bool	file_format(char *file, char *format);
 bool    line_is_space(char *line);
 
@@ -37,8 +37,9 @@ void	freedom(t_cud *cud);
 # define MLXINIERR "mlx failed to initlize"
 # define INPERR "no file input"
 # define FILEEMPTY "file is empty"
-# define FILNAME "Wrong file nme of"
+# define FILNAME "Wrong file name of"
 # define FILTYPE "Wrong file type of"
+# define XPMERR "XPM file is invalid of"
 # define DIRNULL "directory is empty"
 # define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
 # define MALLERR "malloc error :an unexpected error occured"
