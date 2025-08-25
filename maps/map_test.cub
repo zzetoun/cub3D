@@ -6,8 +6,8 @@ SOtextures/SO/teapot.xpm
 
 WE textures/WE/teapot.xpm
 
-F 220,100,0
-C 225,30,0
+F 2, 1,0
+C 225,30,00000
 
 
 		1111111111111111111111111

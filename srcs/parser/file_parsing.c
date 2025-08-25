@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   file_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 15:44:30 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/25 00:23:29 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/08/25 19:11:02 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/08/25 19:11:02 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -32,25 +32,24 @@ bool	file_to_data(t_cud *cud)
 	cud->file_data = ft_split(line, '\n');
 	free(line);
 	if (!cud->file_data)
-		return(errmsg(MALLERR, NULL));
+		return (errmsg(MALLERR, NULL));
 	return (EXIT_SUCCESS);
 }
 
 bool	file_parsing(char *av, t_cud *cud)
 {
-	if(!av || !av[0])
-		return(errmsg(INPERR, NULL));
+	if (!av || !av[0])
+		return (errmsg(INPERR, NULL));
 	if (file_format(av, ".cub"))
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	cud->file_fd = open(av, O_RDONLY);
 	if (cud->file_fd < 0)
-		return(errmsg(av, strerror(errno)));
+		return (errmsg(av, strerror(errno)));
 	if (file_to_data(cud))
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (fill_to_xpm(cud))
+		return (EXIT_FAILURE);
+	if (fill_to_color(cud))
 		return(EXIT_FAILURE);
-	// if (fill_to_color(cud))
-	// 	return(EXIT_FAILURE);
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
-

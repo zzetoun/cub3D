@@ -23,6 +23,12 @@ enum e_cd
 	WE
 };
 
+enum e_colors
+{
+	F = 0,
+	C,
+};
+
 typedef	struct s_dir
 {
 	char	*dir;
@@ -30,16 +36,14 @@ typedef	struct s_dir
 
 typedef struct s_xpm
 {
-	void	*xpm_dir;
+	void	*xpm_file;
 	int		img_width;
 	int		img_height;
 } t_xpm;
 
 typedef struct s_map
 {
-	int		**colors;
-	char	*floor_c;
-	char	*celing_c;
+	int		colors[2][3];
 	bool	valid_map;
 } t_map;
 
@@ -47,6 +51,7 @@ typedef struct s_cud
 {
 	void	*mlx;
 	char	**file_data;
+	char	*colors_data[2];
 	int		file_fd;
 	t_map	map;
 	t_dir	dirs[4];

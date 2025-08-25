@@ -30,7 +30,8 @@ bool	file_format(char *file, char *format);
 bool    line_is_space(char *line);
 
 bool	fill_to_xpm(t_cud *cud);
-void	ft_free_array(char **array);
+bool	fill_to_color(t_cud *cud);
+void	ft_free_array(char **array, int idx);
 void	freedom(t_cud *cud);
 
 # define WHITESPACE " \t\n\v\f\r"
@@ -40,7 +41,9 @@ void	freedom(t_cud *cud);
 # define FILNAME "Wrong file name of"
 # define FILTYPE "Wrong file type of"
 # define XPMERR "XPM file is invalid of"
-# define DIRNULL "directory is empty"
+# define DIRNULL "XPM directory is empty to"
+# define COLORERR "Color set number is wrong"
+# define COLORNULL "Color set is empty"
 # define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
 # define MALLERR "malloc error :an unexpected error occured"
 

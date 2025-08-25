@@ -12,17 +12,15 @@
 
 #include "cub3d.h"
 
-void	ft_free_array(char **array)
+void	ft_free_array(char **array, int idx)
 {
-	int	idx;
-
 	if (!array)
 		return ;
-	idx = -1;
-	while (array[++idx])
+	while (array[idx])
 	{
 		free(array[idx]);
 		array[idx] = NULL;
+		idx++;
 	}
 	free(array);
 	array = NULL;
@@ -43,8 +41,8 @@ static void	free_xpms(t_cud *cud)
 
 	idx = -1;
 	while(++idx < 4)
-		if (cud->xpms[idx].xpm_dir)
-            mlx_destroy_image(cud->mlx, cud->xpms[idx].xpm_dir);
+		if (cud->xpms[idx].xpm_file)
+            mlx_destroy_image(cud->mlx, cud->xpms[idx].xpm_file);
 }
 
 void	freedom(t_cud *cud)
@@ -54,7 +52,7 @@ void	freedom(t_cud *cud)
 		close(cud->file_fd);
 		cud->file_fd = -1;
 	}
-	ft_free_array(cud->file_data);
+	ft_free_array(cud->file_data, 0);
 	free_dirs(cud);
 	free_xpms(cud);
 	if (cud->mlx) // have to make sure if i need this or not
