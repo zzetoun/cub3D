@@ -15,12 +15,17 @@
 
 # include <stdbool.h>
 
+enum e_cd
+{
+	NO = 0,
+	EA,
+	SO,
+	WE
+};
+
 typedef	struct s_dir
 {
-	char	*no_dir;
-	char	*so_dir;
-	char	*we_dir;
-	char	*ea_dir;
+	char	*dir;
 } t_dir;
 
 typedef struct s_xpm
@@ -33,7 +38,6 @@ typedef struct s_xpm
 typedef struct s_map
 {
 	int		**colors;
-	t_dir	dirs;
 	char	*floor_c;
 	char	*celing_c;
 	bool	valid_map;
@@ -45,6 +49,7 @@ typedef struct s_cud
 	char	**file_data;
 	int		file_fd;
 	t_map	map;
+	t_dir	dirs[4];
 	t_xpm	xpms[4];
 } t_cud;
 

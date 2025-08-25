@@ -28,27 +28,23 @@ void	ft_free_array(char **array)
 	array = NULL;
 }
 
-static void	free_dirs(t_dir *dirs)
+static void	free_dirs(t_cud *cud)
 {
-	if (dirs->no_dir)
-		free(dirs->no_dir);
-	if (dirs->so_dir)
-		free(dirs->so_dir);
-	if (dirs->ea_dir)
-		free(dirs->ea_dir);
-	if (dirs->we_dir)
-		free(dirs->we_dir);
+	int	idx;
+
+	idx = -1;
+	while(++idx < 4)
+		if (cud->dirs[idx].dir)
+            free(cud->dirs[idx].dir);
 }
 static void	free_xpms(t_cud *cud)
 {
-	int	i;
+	int	idx;
 
-	i = -1;
-	while(++i < 4)
-	{
-		if (cud->xpms[i].xpm_dir)
-            mlx_destroy_image(cud->mlx, cud->xpms[i].xpm_dir);
-	}
+	idx = -1;
+	while(++idx < 4)
+		if (cud->xpms[idx].xpm_dir)
+            mlx_destroy_image(cud->mlx, cud->xpms[idx].xpm_dir);
 }
 
 void	freedom(t_cud *cud)
@@ -59,18 +55,18 @@ void	freedom(t_cud *cud)
 		cud->file_fd = -1;
 	}
 	ft_free_array(cud->file_data);
-	free_dirs(&cud->map.dirs);
+	free_dirs(cud);
 	free_xpms(cud);
-	if (cud->mlx)
+	if (cud->mlx) // have to make sure if i need this or not
 		free(cud->mlx);
 }
 
 bool	errmsg(char *details, char *error)
 {
 	if (details && error)
-		ft_printf(2, "Error\n<%s: %s>\n", details, error);
+		ft_printf(2, "Error\n< %s: %s >\n", details, error);
 	else if (details)
-		ft_printf(2, "Error\n<%s>\n", details);
+		ft_printf(2, "Error\n< %s >\n", details);
 	else
 		ft_printf(2, "Error\n");
 	return (EXIT_FAILURE);

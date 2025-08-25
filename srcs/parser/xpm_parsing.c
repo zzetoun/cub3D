@@ -16,26 +16,26 @@ static bool xpm_to_image(t_cud *cud)
 {
 	char	*dir;
 
-	dir = cud->map.dirs.no_dir;
-    cud->xpms[0].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
-		&cud->xpms[0].img_width, &cud->xpms[0].img_height);
-	if (!cud->xpms[0].xpm_dir)
-		return (errmsg(XPMERR, "North"));
-	dir = cud->map.dirs.so_dir;
-    cud->xpms[1].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
-		&cud->xpms[1].img_width, &cud->xpms[1].img_height);
-	if (!cud->xpms[1].xpm_dir)
-		return (errmsg(XPMERR, "South"));
-	dir = cud->map.dirs.ea_dir;
-	cud->xpms[2].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
-		&cud->xpms[2].img_width, &cud->xpms[2].img_height);
-	if (!cud->xpms[2].xpm_dir)
-		return (errmsg(XPMERR, "East"));
-	dir = cud->map.dirs.we_dir;
-	cud->xpms[3].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
-		&cud->xpms[3].img_width, &cud->xpms[3].img_height);
-	if (!cud->xpms[3].xpm_dir)
-		return (errmsg(XPMERR, "West"));
+	dir = cud->dirs[NO].dir;
+    cud->xpms[NO].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[NO].img_width, &cud->xpms[NO].img_height);
+	if (!cud->xpms[NO].xpm_dir)
+		return (errmsg(XPMERR, "North XPM"));
+		dir = cud->dirs[EA].dir;
+    cud->xpms[EA].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[EA].img_width, &cud->xpms[EA].img_height);
+	if (!cud->xpms[EA].xpm_dir)
+		return (errmsg(XPMERR, "East XPM"));
+		dir = cud->dirs[SO].dir;
+	cud->xpms[SO].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[SO].img_width, &cud->xpms[SO].img_height);
+	if (!cud->xpms[SO].xpm_dir)
+		return (errmsg(XPMERR, "South XPM"));
+		dir = cud->dirs[WE].dir;
+	cud->xpms[WE].xpm_dir = mlx_xpm_file_to_image(cud->mlx, dir, 
+		&cud->xpms[WE].img_width, &cud->xpms[WE].img_height);
+	if (!cud->xpms[WE].xpm_dir)
+		return (errmsg(XPMERR, "West XPM"));
     return (EXIT_SUCCESS);
 }
 
@@ -64,24 +64,22 @@ static bool clean_and_valid_dir(char **dir_ptr)
     *dir_ptr = trimmed_dir;
     return (EXIT_SUCCESS);
 }
-static bool	dir_to_xpm(t_cud *cud, t_dir *dirs)
+static bool	dir_to_xpm(t_cud *cud)
 {
-	if (!dirs->no_dir)
+	int	idx;
+
+	idx = -1;
+	if (!cud->dirs[NO].dir)
         return (errmsg(DIRNULL, "North"));
-    else if (!dirs->so_dir)
-        return (errmsg(DIRNULL, "South"));
-    else if (!dirs->we_dir)
-        return (errmsg(DIRNULL, "West"));
-    else if (!dirs->ea_dir)
+    else if (!cud->dirs[EA].dir)
         return (errmsg(DIRNULL, "East"));
-    if (clean_and_valid_dir(&dirs->no_dir))
-        return (EXIT_FAILURE);
-    else if (clean_and_valid_dir(&dirs->so_dir))
-        return (EXIT_FAILURE);
-    else if (clean_and_valid_dir(&dirs->we_dir))
-        return (EXIT_FAILURE);
-    else if (clean_and_valid_dir(&dirs->ea_dir))
-        return (EXIT_FAILURE);
+    else if (!cud->dirs[SO].dir)
+        return (errmsg(DIRNULL, "South"));
+    else if (!cud->dirs[WE].dir)
+        return (errmsg(DIRNULL, "West"));
+	while (++idx < 4)
+    	if (clean_and_valid_dir(&cud->dirs[idx].dir))
+        	return (EXIT_FAILURE);
     if (xpm_to_image(cud))
         return (EXIT_FAILURE);
     return (EXIT_SUCCESS);
@@ -102,15 +100,15 @@ bool	fill_to_xpm(t_cud *cud)
 			jdx++;
 		if (f_data && ft_strlen(f_data) - jdx >= 7)
 		{
-            if (!ft_strncmp(f_data + jdx, "NO", 2) && !cud->map.dirs.no_dir)
-                cud->map.dirs.no_dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "SO", 2) && !cud->map.dirs.so_dir)
-				cud->map.dirs.so_dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "WE", 2) && !cud->map.dirs.we_dir)
-				cud->map.dirs.we_dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "EA", 2) && !cud->map.dirs.ea_dir)
-				cud->map.dirs.ea_dir = ft_strdup(f_data + jdx + 2);
+            if (!ft_strncmp(f_data + jdx, "NO", 2) && !cud->dirs[NO].dir)
+                cud->dirs[NO].dir = ft_strdup(f_data + jdx + 2);
+			if (!ft_strncmp(f_data + jdx, "EA", 2) && !cud->dirs[EA].dir)
+				cud->dirs[EA].dir = ft_strdup(f_data + jdx + 2);
+			if (!ft_strncmp(f_data + jdx, "SO", 2) && !cud->dirs[SO].dir)
+				cud->dirs[SO].dir = ft_strdup(f_data + jdx + 2);
+			if (!ft_strncmp(f_data + jdx, "WE", 2) && !cud->dirs[WE].dir)
+				cud->dirs[WE].dir = ft_strdup(f_data + jdx + 2);
 		}
 	}
-    return (dir_to_xpm(cud, &cud->map.dirs));
+    return (dir_to_xpm(cud));
 }
