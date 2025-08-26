@@ -70,7 +70,11 @@ bool	fill_to_color(t_cud *cud)
 	while (cud->data[++i])
 	{
 		j = 0;
-		while (cud->data[i] && ft_isspace(cud->data[i][j]))
+		while (cud->data[i] && line_is_space(cud->data[i]))
+			i++;
+		if (!cud->data[i])
+			return (colors_clean_up(cud));
+		while (cud->data[i] && ft_isspace((unsigned char)cud->data[i][j]))
 			j++;
 		if (!cud->data[i] || ft_strlen(cud->data[i]) - j < 7)
 			continue ;
@@ -79,13 +83,9 @@ bool	fill_to_color(t_cud *cud)
 		if (!ft_strncmp(cud->data[i] + j, "C ", 2) && !cud->cs[C].c_set)
 			cud->cs[C].c_set = ft_strtrim(cud->data[i] + j + 2, WHITESPACE);
 	}
-	i = -1;
-	while (++i < 2)
-	{
-		if (!cud->cs[i].c_set && i == F)
-			return (errmsg(COLORNULL, "Floor"));
-		else if (!cud->cs[i].c_set && i == C)
-			return (errmsg(COLORNULL, "Celing"));
-	}
+	if (!cud->cs[F].c_set)
+		return (errmsg(COLORNULL, "Floor"));
+	else if (!cud->cs[C].c_set)
+		return (errmsg(COLORNULL, "Celing"));
 	return (colors_clean_up(cud));
 }

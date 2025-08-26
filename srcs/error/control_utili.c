@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:43:28 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/26 15:43:32 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/26 16:09:58 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_free_array(char **array, int idx)
 		idx++;
 	}
 	free(array);
-	array = NULL;
 }
 
 bool	errmsg(char *details, char *error)

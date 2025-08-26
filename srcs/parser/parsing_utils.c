@@ -19,7 +19,7 @@ bool	line_is_space(char *line)
 	if (!line)
 		return (false);
 	idx = 0;
-	while (ft_isspace(line[idx]))
+	while (ft_isspace((unsigned char)line[idx]))
 		idx++;
 	if (ft_strlen(line) == idx)
 		return (true);

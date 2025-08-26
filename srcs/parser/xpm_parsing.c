@@ -72,7 +72,9 @@ bool	fill_to_xpm(t_cud *cud)
 		j = 0;
 		while (cud->data[i] && line_is_space(cud->data[i]))
 			i++;
-		while (cud->data[i] && ft_isspace(cud->data[i][j]))
+		if (!cud->data[i])
+			return (dir_to_xpm(cud));
+		while (cud->data[i] && ft_isspace((unsigned char)cud->data[i][j]))
 			j++;
 		if (!cud->data[i] || ft_strlen(cud->data[i]) - j < 7)
 			continue ;

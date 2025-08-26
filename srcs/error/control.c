@@ -20,9 +20,15 @@ static	void	free_colors(t_cud *cud)
 	while (++idx < 2)
 	{
 		if (cud->cs[idx].c_set)
+		{
 			free(cud->cs[idx].c_set);
+			cud->cs[idx].c_set = NULL;
+		}
 		if (cud->cs[idx].colors)
+		{
 			ft_free_array(cud->cs[idx].colors, 0);
+			cud->cs[idx].colors = NULL;
+		}
 	}
 }
 
@@ -32,8 +38,13 @@ static void	free_dirs(t_cud *cud)
 
 	idx = -1;
 	while (++idx < 4)
+	{
 		if (cud->dirs[idx])
+		{
 			free(cud->dirs[idx]);
+			cud->dirs[idx] = NULL;
+		}
+	}
 }
 
 static	void	free_xpms(t_cud *cud)
@@ -42,18 +53,30 @@ static	void	free_xpms(t_cud *cud)
 
 	idx = -1;
 	while (++idx < 4)
+	{
 		if (cud->map.xpms[idx].xpm_file)
+		{
 			mlx_destroy_image(cud->mlx, cud->map.xpms[idx].xpm_file);
+			cud->map.xpms[idx].xpm_file = NULL;
+		}
+
+	}
 }
 
 void	freedom(t_cud *cud)
 {
+	if (!cud)
+		return ;
 	if (cud->file_fd > 0)
 	{
 		close(cud->file_fd);
 		cud->file_fd = -1;
 	}
-	ft_free_array(cud->data, 0);
+	if (cud->data)
+	{
+		ft_free_array(cud->data, 0);
+		cud->data = NULL;
+	}
 	free_dirs(cud);
 	free_xpms(cud);
 	free_colors(cud);
