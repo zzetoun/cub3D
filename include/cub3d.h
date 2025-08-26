@@ -49,7 +49,7 @@ void	freedom(t_cud *cud);
 # define XPMERR "Invalid or corrupted XPM file"
 # define DIRNULL "XPM directory is missing or empty for"
 
-# define COLORERR "Invalid number of color values specified"
+# define COLORERR "Invalid number of color values specified for"
 # define COLORNULL "Color value is missing for"
 # define COLOROUT "Color value out of range (0-255) for"
 

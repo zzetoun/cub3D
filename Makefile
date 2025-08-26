@@ -51,6 +51,7 @@ NC      = \033[0m
 # -------------------------
 SRCS = cub3d.c 						\
        error/control.c 				\
+	   error/control_utili.c 		\
        parser/file_parsing.c 		\
        parser/parsing_utils.c 		\
        parser/xpm_parsing.c			\

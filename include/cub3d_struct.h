@@ -15,30 +15,25 @@
 
 # include <stdbool.h>
 
-enum e_cd
+enum e_index
 {
 	NO = 0,
 	EA,
 	SO,
 	WE,
 	F = 0,
-	C
+	C,
+	R = 0,
+	G,
+	B
 };
 
 /* Color Set Struct */
 typedef struct s_cset
 {
-	int		red;
-	int		green;
-	int		blue;
 	char	**colors;
 	char	*c_set;
 } t_cset;
-
-typedef	struct s_dir
-{
-	char	*dir;
-} t_dir;
 
 typedef struct s_xpm
 {
@@ -51,17 +46,17 @@ typedef struct s_map
 {
 	int		colors[2][3];
 	bool	valid_map;
+	t_xpm	xpms[4];
 } t_map;
 
 typedef struct s_cud
 {
 	void	*mlx;
+	char	*dirs[4];
 	char	**data;
 	int		file_fd;
 	t_cset	cs[2];
 	t_map	map;
-	t_dir	dirs[4];
-	t_xpm	xpms[4];
 } t_cud;
 
 #endif

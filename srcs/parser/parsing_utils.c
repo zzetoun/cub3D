@@ -21,7 +21,7 @@ bool	line_is_space(char *line)
 	idx = 0;
 	while (ft_isspace(line[idx]))
 		idx++;
-	if (ft_strlen(line) == idx + 1)
+	if (ft_strlen(line) == idx)
 		return (true);
 	return (false);
 }
