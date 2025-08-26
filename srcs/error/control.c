@@ -52,7 +52,7 @@ void	freedom(t_cud *cud)
 		close(cud->file_fd);
 		cud->file_fd = -1;
 	}
-	ft_free_array(cud->file_data, 0);
+	ft_free_array(cud->data, 0);
 	free_dirs(cud);
 	free_xpms(cud);
 	if (cud->mlx) // have to make sure if i need this or not

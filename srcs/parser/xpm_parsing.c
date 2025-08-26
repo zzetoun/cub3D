@@ -39,35 +39,10 @@ static bool	xpm_to_image(t_cud *cud)
 	return (EXIT_SUCCESS);
 }
 
-static	bool	clean_and_valid_dir(char **dir_ptr)
-{
-	char	*trimmed_dir;
-	int		fd;
-
-	trimmed_dir = ft_strtrim(*dir_ptr, WHITESPACE);
-	if (!trimmed_dir)
-		return (errmsg(MALLERR, NULL));
-	if (file_format(trimmed_dir, ".xpm"))
-	{
-		free(trimmed_dir);
-		return (EXIT_FAILURE);
-	}
-	fd = open(trimmed_dir, O_RDONLY);
-	if (fd < 0)
-	{
-		errmsg(trimmed_dir, strerror(errno));
-		free(trimmed_dir);
-		return (EXIT_FAILURE);
-	}
-	close(fd);
-	free(*dir_ptr);
-	*dir_ptr = trimmed_dir;
-	return (EXIT_SUCCESS);
-}
-
 static	bool	dir_to_xpm(t_cud *cud)
 {
 	int	idx;
+	int	fd;
 
 	idx = -1;
 	if (!cud->dirs[NO].dir)
@@ -79,8 +54,14 @@ static	bool	dir_to_xpm(t_cud *cud)
 	else if (!cud->dirs[WE].dir)
 		return (errmsg(DIRNULL, "West"));
 	while (++idx < 4)
-		if (clean_and_valid_dir(&cud->dirs[idx].dir))
+	{
+		if (file_format(cud->dirs[idx].dir, ".xpm"))
 			return (EXIT_FAILURE);
+		fd = open(cud->dirs[idx].dir, O_RDONLY);
+		if (fd < 0)
+			return (errmsg(cud->dirs[idx].dir, strerror(errno)));
+		close(fd);
+	}
 	if (xpm_to_image(cud))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -88,28 +69,27 @@ static	bool	dir_to_xpm(t_cud *cud)
 
 bool	fill_to_xpm(t_cud *cud)
 {
-	int		idx;
-	int		jdx;
-	char	*f_data;
+	int		i;
+	int		j;
 
-	idx = -1;
-	while (cud->file_data[++idx])
+	i = -1;
+	while (cud->data[++i])
 	{
-		jdx = 0;
-		f_data = cud->file_data[idx];
-		while (f_data && ft_isspace(f_data[jdx]))
-			jdx++;
-		if (f_data && ft_strlen(f_data) - jdx >= 7)
-		{
-			if (!ft_strncmp(f_data + jdx, "NO", 2) && !cud->dirs[NO].dir)
-				cud->dirs[NO].dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "EA", 2) && !cud->dirs[EA].dir)
-				cud->dirs[EA].dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "SO", 2) && !cud->dirs[SO].dir)
-				cud->dirs[SO].dir = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "WE", 2) && !cud->dirs[WE].dir)
-				cud->dirs[WE].dir = ft_strdup(f_data + jdx + 2);
-		}
+		j = 0;
+		while(line_is_space(cud->data[i]))
+			i++;
+		while (cud->data[i] && ft_isspace(cud->data[i][j]))
+			j++;
+		if (!cud->data[i] || ft_strlen(cud->data[i]) - j < 7)
+			continue;
+		if (!ft_strncmp(cud->data[i] + j, "NO ", 3) && !cud->dirs[NO].dir)
+			cud->dirs[NO].dir = ft_strtrim(cud->data[i] + j + 3, WHITESPACE);
+		if (!ft_strncmp(cud->data[i] + j, "EA ", 3) && !cud->dirs[EA].dir)
+			cud->dirs[EA].dir = ft_strtrim(cud->data[i] + j + 3, WHITESPACE);
+		if (!ft_strncmp(cud->data[i] + j, "SO ", 3) && !cud->dirs[SO].dir)
+			cud->dirs[SO].dir = ft_strtrim(cud->data[i] + j + 3, WHITESPACE);
+		if (!ft_strncmp(cud->data[i] + j, "WE ", 3) && !cud->dirs[WE].dir)
+			cud->dirs[WE].dir = ft_strtrim(cud->data[i] + j + 3, WHITESPACE);
 	}
 	return (dir_to_xpm(cud));
 }

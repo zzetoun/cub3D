@@ -1,13 +1,15 @@
-                          NO   textures/NO/teapot.xpm
+                          NO   ./textures/NO/teapot.xpm
 
 
-SOtextures/SO/teapot.xpm
+SO textures/SO/teapot.xpm
 
 
 WE textures/WE/teapot.xpm
 
-F 2, 1,0
+F 2,    1,0
 C 225,30,00000
+
+
 
 
 		1111111111111111111111111
@@ -23,7 +25,7 @@ C 225,30,00000
 
 
 
-EA textures/EA/teapot.xpm     									
+EA        textures/EA/teapot.xpm     									
 
 
 

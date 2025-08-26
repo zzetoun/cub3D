@@ -31,20 +31,34 @@ bool    line_is_space(char *line);
 
 bool	fill_to_xpm(t_cud *cud);
 bool	fill_to_color(t_cud *cud);
+bool	double_check(t_cud *cud);
 void	ft_free_array(char **array, int idx);
 void	freedom(t_cud *cud);
 
 # define WHITESPACE " \t\n\v\f\r"
-# define MLXINIERR "mlx failed to initlize"
-# define INPERR "no file input"
-# define FILEEMPTY "file is empty"
-# define FILNAME "Wrong file name of"
-# define FILTYPE "Wrong file type of"
-# define XPMERR "XPM file is invalid of"
-# define DIRNULL "XPM directory is empty to"
-# define COLORERR "Color set number is wrong"
-# define COLORNULL "Color set is empty"
-# define ARGERR "Numbers of Arguments only 1 ./cub3D file_name"
-# define MALLERR "malloc error :an unexpected error occured"
+# define INPERR "No input file provided"
+# define ARGERR "Invalid number of arguments: usage ./cub3D <file_name>"
+# define MALLERR "Memory allocation failed: unexpected error occurred"
+# define MLXINIERR "Failed to initialize the MLX graphics library"
+
+# define FILEEMPTY "The input file is empty"
+# define FILNAME "Invalid file name for"
+# define FILTYPE "Unsupported file type for"
+# define FILDUB "Duplicate entry detected"
+
+# define XPMERR "Invalid or corrupted XPM file"
+# define DIRNULL "XPM directory is missing or empty for"
+
+# define COLORERR "Invalid number of color values specified"
+# define COLORNULL "Color value is missing for"
+# define COLOROUT "Color value out of range (0-255) for"
+
+# define MAPERR "Invalid map configuration"
+# define MAPCHARERR "Map contains invalid characters"
+# define MAPBOUNDERR "Map is not properly surrounded by walls"
+# define MAPPLAYERERR "Map must contain exactly one player starting position"
+# define MAPMULTIPLAYER "Multiple player positions detected"
+# define MAPEMPTYERR "Map is missing or empty"
+# define MAPSPACEERR "Map contains unexpected empty spaces"
 
 #endif

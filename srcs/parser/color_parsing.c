@@ -20,23 +20,15 @@ static	bool	format_validate(char **colors)
 	idx = -1;
 	while (++idx < 3)
 	{
-		trimmed_dir = ft_strtrim(colors[idx], WHITESPACE);
-		if (!trimmed_dir)
-			return (errmsg(MALLERR, NULL));
-		free(colors[idx]);
-		colors[idx] = ft_strdup(trimmed_dir);
-		if (!colors[idx])
-		{
-			ft_free_array(colors, idx);
-			free(trimmed_dir);
-			return (errmsg(MALLERR, NULL));
-		}
-		free(trimmed_dir);
+		if (ft_strlen(color[idx] > 3))
+			return (errmsg(COLOROUT, NULL));
+		else 
 	}
+
 	return (EXIT_SUCCESS);
 }
 
-static	bool	colors_to_int(t_cud *cud)
+static	bool	colors_clean_up(t_cud *cud)
 {
 	char	**colors;
 	int		idx;
@@ -51,7 +43,7 @@ static	bool	colors_to_int(t_cud *cud)
 		if (ft_array_len(colors) != 3)
 		{
 			ft_free_array(colors, 0);
-			if (idx == 0)
+			if (idx == F)
 				return (errmsg("Floor", COLORERR));
 			else
 				return (errmsg("Ceiling", COLORERR));
@@ -64,55 +56,27 @@ static	bool	colors_to_int(t_cud *cud)
 	return (EXIT_SUCCESS);
 }
 
-static	bool	clean_up_colors(t_cud *cud)
-{
-	int		idx;
-	char	*trimmed_dir;
-
-	idx = -1;
-	while (++idx < 2)
-	{
-		if (!cud->colors_data[idx])
-		{
-			if (idx == F)
-				return (errmsg(COLORNULL, "Floor"));
-			else if (idx == C)
-				return (errmsg(COLORNULL, "Celing"));
-		}
-		trimmed_dir = ft_strtrim(cud->colors_data[idx], WHITESPACE);
-		if (!trimmed_dir)
-			return (errmsg(MALLERR, NULL));
-		free(cud->colors_data[idx]);
-		cud->colors_data[idx] = ft_strdup(trimmed_dir);
-		free(trimmed_dir);
-		if (!cud->colors_data[idx])
-			return (errmsg(MALLERR, NULL));
-	}
-	if (colors_to_int(cud))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
 bool	fill_to_color(t_cud *cud)
 {
-	int		idx;
-	int		jdx;
-	char	*f_data;
+	int		i;
+	int		j;
 
-	idx = -1;
-	while (cud->file_data[++idx])
+	i = -1;
+	while (cud->data[++i])
 	{
-		jdx = 0;
-		f_data = cud->file_data[idx];
-		while (f_data && ft_isspace(f_data[jdx]))
-			jdx++;
-		if (f_data && ft_strlen(f_data) - jdx >= 7)
-		{
-			if (!ft_strncmp(f_data + jdx, "F ", 2) && !cud->colors_data[F])
-				cud->colors_data[F] = ft_strdup(f_data + jdx + 2);
-			if (!ft_strncmp(f_data + jdx, "C ", 2) && !cud->colors_data[C])
-				cud->colors_data[C] = ft_strdup(f_data + jdx + 2);
-		}
+		j = 0;
+		while (cud->data[i] && ft_isspace(cud->data[i][j]))
+			j++;
+		if (!cud->data[i] && ft_strlen(cud->data[i]) - j < 7)
+			continue;
+		if (!ft_strncmp(cud->data[i] + j, "F ", 2) && !cud->cs[F].c_set)
+			cud->cs[F].c_set = ft_strtrim(cud->data[i] + j + 2, WHITESPACE);
+		if (!ft_strncmp(cud->data[i] + j, "C ", 2) && !cud->cs[C].c_set)
+			cud->cs[c].c_set = ft_strtrim(cud->data[i] + j + 2, WHITESPACE);
 	}
-	return (clean_up_colors(cud));
+	if (!cud->cs[F].c_set)
+		return (errmsg(COLORNULL, "Floor"));
+	else if (!cud->cs[C].c_set)
+		return (errmsg(COLORNULL, "Celing"));
+	return (colors_clean_up(cud));
 }

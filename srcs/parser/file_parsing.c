@@ -29,9 +29,9 @@ bool	file_to_data(t_cud *cud)
 		tmp = gnl(cud->file_fd);
 		line = ft_strjoin_free(line, tmp);
 	}
-	cud->file_data = ft_split(line, '\n');
+	cud->data = ft_split(line, '\n');
 	free(line);
-	if (!cud->file_data)
+	if (!cud->data)
 		return (errmsg(MALLERR, NULL));
 	return (EXIT_SUCCESS);
 }
@@ -45,11 +45,9 @@ bool	file_parsing(char *av, t_cud *cud)
 	cud->file_fd = open(av, O_RDONLY);
 	if (cud->file_fd < 0)
 		return (errmsg(av, strerror(errno)));
-	if (file_to_data(cud))
+	if (file_to_data(cud) || double_check(cud))
 		return (EXIT_FAILURE);
-	if (fill_to_xpm(cud))
+	if (fill_to_xpm(cud) || fill_to_color(cud))
 		return (EXIT_FAILURE);
-	if (fill_to_color(cud))
-		return(EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

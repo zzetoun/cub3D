@@ -20,14 +20,20 @@ enum e_cd
 	NO = 0,
 	EA,
 	SO,
-	WE
+	WE,
+	F = 0,
+	C
 };
 
-enum e_colors
+/* Color Set Struct */
+typedef struct s_cset
 {
-	F = 0,
-	C,
-};
+	int		red;
+	int		green;
+	int		blue;
+	char	**colors;
+	char	*c_set;
+} t_cset;
 
 typedef	struct s_dir
 {
@@ -50,9 +56,9 @@ typedef struct s_map
 typedef struct s_cud
 {
 	void	*mlx;
-	char	**file_data;
-	char	*colors_data[2];
+	char	**data;
 	int		file_fd;
+	t_cset	cs[2];
 	t_map	map;
 	t_dir	dirs[4];
 	t_xpm	xpms[4];

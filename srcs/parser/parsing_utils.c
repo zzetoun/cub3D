@@ -26,6 +26,35 @@ bool	line_is_space(char *line)
 	return (false);
 }
 
+bool	double_check(t_cud *cud)
+{
+	int	i;
+	int	len;
+	int	total;
+
+	i = -1;
+	total = 0;
+	while (cud->data[++i])
+	{
+		len = ft_strlen(cud->data[i]);
+		if (ft_strnstr(cud->data[i], "NO", len))
+			total++;
+		else if (ft_strnstr(cud->data[i], "EA", len))
+			total++;
+		else if (ft_strnstr(cud->data[i], "SO", len))
+			total++;
+		else if (ft_strnstr(cud->data[i], "WE", len))
+			total++;
+		else if (ft_strchr(cud->data[i], 'F'))
+			total++;
+		else if (ft_strchr(cud->data[i], 'C'))
+			total++;
+	}
+	if (total > 6)
+		return (errmsg(FILDUB, NULL));
+	return (EXIT_SUCCESS);
+}
+
 bool	file_format(char *file, char *format)
 {
 	int	idx;
