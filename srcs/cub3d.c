@@ -19,10 +19,10 @@ static void	print_colors(t_cud *cud)
     for (i = 0; i < 2; i++)
     {
         printf("%s colors: ", i == F ? "Floor" : "Ceiling");
-        if (cud->cs[i].colors)
+        if (cud->par.cs[i].colors)
         {
             for (j = 0; j < 3; j++)
-                printf("%d ", cud->map.colors[i][j]);
+                printf("%d ", cud->map.fc_colors[i][j]);
         }
         printf("\n");
     }
@@ -34,7 +34,7 @@ static void	print_dirs(t_cud *cud)
 
     const char *names[4] = {"NO", "EA", "SO", "WE"};
     for (i = 0; i < 4; i++)
-        printf("%s dir: %s\n", names[i], cud->dirs[i] ? cud->dirs[i] : "NULL");
+        printf("%s dir: %s\n", names[i], cud->par.dirs[i] ? cud->par.dirs[i] : "NULL");
 }
 
 static void	print_xpms(t_cud *cud)
@@ -53,11 +53,11 @@ static void	print_xpms(t_cud *cud)
 static void	print_file_data(t_cud *cud)
 {
     int i = 0;
-    if (!cud->data)
+    if (!cud->par.data)
         return;
-    while (cud->data[i])
+    while (cud->par.data[i])
     {
-        printf("Line %d: %s\n", i, cud->data[i]);
+        printf("Line %d: %s\n", i, cud->par.data[i]);
         i++;
     }
 }

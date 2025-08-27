@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+// bool	validate_file_order(t_cud *cud)
+// {
 
+// }
 bool	file_to_data(t_cud *cud)
 {
 	char	*tmp;
 	char	*line;
 
-	tmp = gnl(cud->file_fd);
+	tmp = gnl(cud->par.cub_fd);
 	if (!tmp)
 		return (errmsg(FILEEMPTY, NULL));
 	line = NULL;
@@ -26,12 +29,12 @@ bool	file_to_data(t_cud *cud)
 	{
 		free(tmp);
 		tmp = NULL;
-		tmp = gnl(cud->file_fd);
+		tmp = gnl(cud->par.cub_fd);
 		line = ft_strjoin_free(line, tmp);
 	}
-	cud->data = ft_split(line, '\n');
+	cud->par.data = ft_split(line, '\n');
 	free(line);
-	if (!cud->data)
+	if (!cud->par.data)
 		return (errmsg(MALLERR, NULL));
 	return (EXIT_SUCCESS);
 }
@@ -42,8 +45,8 @@ bool	file_parsing(char *av, t_cud *cud)
 		return (errmsg(INPERR, NULL));
 	if (file_format(av, ".cub"))
 		return (EXIT_FAILURE);
-	cud->file_fd = open(av, O_RDONLY);
-	if (cud->file_fd < 0)
+	cud->par.cub_fd = open(av, O_RDONLY);
+	if (cud->par.cub_fd < 0)
 		return (errmsg(av, strerror(errno)));
 	if (file_to_data(cud) || double_check(cud))
 		return (EXIT_FAILURE);

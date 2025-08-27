@@ -55,7 +55,8 @@ SRCS = cub3d.c 						\
        parser/file_parsing.c 		\
        parser/parsing_utils.c 		\
        parser/xpm_parsing.c			\
-	   parser/color_parsing.c 	
+	   parser/color_parsing.c		\
+	   formula/projection.c 	
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS = $(SRCS:.c=.o)

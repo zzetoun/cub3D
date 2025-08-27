@@ -28,30 +28,30 @@ bool	line_is_space(char *line)
 
 bool	double_check(t_cud *cud)
 {
-	int	i;
-	int	len;
-	int	total;
+	int		i;
+	int		len;
+	char	*d;
 
 	i = -1;
-	total = 0;
-	while (cud->data[++i])
+	while (cud->par.data[++i])
 	{
-		len = ft_strlen(cud->data[i]);
-		if (ft_strnstr(cud->data[i], "NO", len))
-			total++;
-		else if (ft_strnstr(cud->data[i], "EA", len))
-			total++;
-		else if (ft_strnstr(cud->data[i], "SO", len))
-			total++;
-		else if (ft_strnstr(cud->data[i], "WE", len))
-			total++;
-		else if (ft_strchr(cud->data[i], 'F'))
-			total++;
-		else if (ft_strchr(cud->data[i], 'C'))
-			total++;
+		d = cud->par.data[i];
+		len = ft_strlen(d);
+		cud->par.dub[0] += (ft_strnstr(d, "NO", len) != 0);
+		cud->par.dub[1] += (ft_strnstr(d, "EA", len) != 0);
+		cud->par.dub[2] += (ft_strnstr(d, "SO", len) != 0);
+		cud->par.dub[3] += (ft_strnstr(d, "WE", len) != 0);
+		cud->par.dub[4] += (ft_strchr(d, 'F') != 0);
+		cud->par.dub[5] += (ft_strchr(d, 'C') != 0);
+		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'N') != 0);
+		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'E') != 0);
+		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'S') != 0);
+		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'W') != 0);
 	}
-	if (total > 6)
-		return (errmsg(FILDUB, NULL));
+	i = -1;
+	while (++i < 7)
+		if (cud->par.dub[i] > 1)
+			return (errmsg(FILDUB, NULL));
 	return (EXIT_SUCCESS);
 }
 

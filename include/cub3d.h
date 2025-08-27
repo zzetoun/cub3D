@@ -23,6 +23,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include "lines.h"
+# include "formula.h"
 
 bool	errmsg(char *details, char *error);
 bool	file_parsing(char *av, t_cud *cud);
@@ -32,10 +34,11 @@ bool    line_is_space(char *line);
 bool	fill_to_xpm(t_cud *cud);
 bool	fill_to_color(t_cud *cud);
 bool	double_check(t_cud *cud);
+
 void	ft_free_array(char **array, int idx);
 void	freedom(t_cud *cud);
 
-# define WHITESPACE " \t\n\v\f\r"
+# define SPACES " \t\n\v\f\r"
 # define INPERR "No input file provided"
 # define ARGERR "Invalid number of arguments: usage ./cub3D <file_name>"
 # define MALLERR "Memory allocation failed: unexpected error occurred"
