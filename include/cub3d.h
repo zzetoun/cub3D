@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/25 00:23:54 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/28 16:24:21 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -27,13 +27,16 @@
 # include "formula.h"
 
 bool	errmsg(char *details, char *error);
+bool	dc_errmsg(int idx);
 bool	file_parsing(char *av, t_cud *cud);
 bool	file_format(char *file, char *format);
 bool    line_is_space(char *line);
-
 bool	fill_to_xpm(t_cud *cud);
 bool	fill_to_color(t_cud *cud);
 bool	double_check(t_cud *cud);
+bool	validate_map_pos(t_cud *cud);
+
+int		scan_identifier(t_cud *cud, int i);
 
 void	ft_free_array(char **array, int idx);
 void	freedom(t_cud *cud);
@@ -52,7 +55,8 @@ void	freedom(t_cud *cud);
 # define XPMERR "Invalid or corrupted XPM file"
 # define DIRNULL "XPM directory is missing or empty for"
 
-# define COLORERR "Invalid number of color values specified for"
+# define COLORERR "Invalid number of color set for"
+# define COLONOTDIG "Invalid input of color set for"
 # define COLORNULL "Color value is missing for"
 # define COLOROUT "Color value out of range (0-255) for"
 

@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/25 00:22:51 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/28 13:21:38 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -75,10 +75,11 @@ void	test_print_cud(t_cud *cud)
 int	main(int ac, char **av)
 {
 	t_cud	cud;
-	
+
 	if (ac != 2)
 		return (errmsg(ARGERR, NULL));
 	ft_memset(&cud, '\0', sizeof(cud));
+    ft_memset(cud.par.id_idx, -1, sizeof(cud.par.id_idx));
 	cud.mlx = mlx_init();
 	if (!cud.mlx)
 		return (errmsg(MLXINIERR, NULL));

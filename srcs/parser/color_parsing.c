@@ -1,21 +1,33 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xpm_parsing.c                                      :+:      :+:    :+:   */
+/*   color_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:07:04 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/25 19:07:04 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/28 16:34:27 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
+
+static	bool	color_set_is_digit(char *color_set)
+{
+	int	idx;
+
+	idx = -1;
+	while (color_set[++idx])
+		if (!ft_isdigit(color_set[idx]))
+			return (false);
+	return (true);
+}
 
 static	bool	color_to_int(t_cud *cud)
 {
 	int		i;
 	int		j;
+	int		len;
 
 	i = -1;
 	while (++i < 2)
@@ -23,9 +35,14 @@ static	bool	color_to_int(t_cud *cud)
 		j = -1;
 		while (++j < 3)
 		{
-			if (ft_strlen(cud->par.cs[i].colors[j]) > 3 && i == F)
+			if (i == F && !color_set_is_digit(cud->par.cs[i].colors[j]))
+				return (errmsg(COLONOTDIG, "Floor"));
+			else if (i == C && !color_set_is_digit(cud->par.cs[i].colors[j]))
+				return (errmsg(COLONOTDIG, "Floor"));
+			len = ft_strlen(cud->par.cs[i].colors[j]);
+			if (len > 3 && i == F)
 				return (errmsg(COLOROUT, "Floor"));
-			else if (ft_strlen(cud->par.cs[i].colors[j]) > 3 && i == C)
+			else if (len > 3 && i == C)
 				return (errmsg(COLOROUT, "Ceiling"));
 			cud->map.fc_colors[i][j] = ft_atoi(cud->par.cs[i].colors[j]);
 		}
