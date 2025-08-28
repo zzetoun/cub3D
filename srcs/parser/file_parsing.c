@@ -6,11 +6,32 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:11:02 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 13:48:32 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/28 18:05:02 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
+
+bool	double_check(t_cud *cud)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (cud->par.data[++i])
+	{
+		j = 0;
+		while (ft_isspace(cud->par.data[i][j]))
+			j++;
+		if (cud->par.data[i][j])
+			double_parsing(cud, cud->par.data[i] + j, ft_strlen(cud->par.data[i] - j));
+	}
+	i = -1;
+	while (++i < 7)
+		if (cud->par.dub[i] > 1)
+			return (dc_errmsg(i));
+	return (EXIT_SUCCESS);
+}
 
 bool	file_to_data(t_cud *cud)
 {

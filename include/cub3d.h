@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 16:24:21 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/28 17:59:56 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -39,6 +39,7 @@ bool	validate_map_pos(t_cud *cud);
 int		scan_identifier(t_cud *cud, int i);
 
 void	ft_free_array(char **array, int idx);
+void	double_parsing(t_cud *cud, char *data, int len);
 void	freedom(t_cud *cud);
 
 # define SPACES " \t\n\v\f\r"

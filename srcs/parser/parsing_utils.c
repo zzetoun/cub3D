@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:07:41 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 16:08:35 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/28 18:13:32 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,33 +26,27 @@ bool	line_is_space(char *line)
 	return (false);
 }
 
-bool	double_check(t_cud *cud)
+void	double_parsing(t_cud *cud, char *data, int len)
 {
-	int		i;
-	int		len;
-	char	*d;
-
-	i = -1;
-	while (cud->par.data[++i])
+	if (data[0] == 'N' && ft_strnstr(data, "NO", len))
+		cud->par.dub[NO]++;
+	else if (data[0] == 'S' && ft_strnstr(data, "EA", len))
+		cud->par.dub[EA]++;
+	else if (data[0] == 'S' && ft_strnstr(data, "SO", len))
+		cud->par.dub[SO]++;
+	else if (data[0] == 'W' && ft_strnstr(data, "WE", len))
+		cud->par.dub[WE]++;
+	else if (data[0] == 'F')
+		cud->par.dub[F + 4]++;
+	else if (data[0] == 'C')
+		cud->par.dub[C + 4]++;
+	else if (data[0] == '1')
 	{
-		d = cud->par.data[i];
-		len = ft_strlen(d);
-		cud->par.dub[NO] += (ft_strnstr(d, "NO", len) != 0);
-		cud->par.dub[EA] += (ft_strnstr(d, "EA", len) != 0);
-		cud->par.dub[SO] += (ft_strnstr(d, "SO", len) != 0);
-		cud->par.dub[WE] += (ft_strnstr(d, "WE", len) != 0);
-		cud->par.dub[F + 4] += (ft_strchr(d, 'F') != 0);
-		cud->par.dub[C + 4] += (ft_strchr(d, 'C') != 0);
-		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'N') != 0);
-		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'E') != 0);
-		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'S') != 0);
-		cud->par.dub[6] += (ft_strchr(d, '1') != 0 && ft_strchr(d, 'W') != 0);
+		if (ft_strchr(data, 'N') || ft_strchr(data, 'E'))
+			cud->par.dub[6]++;
+		else if (ft_strchr(data, 'S') || ft_strchr(data, 'W'))
+			cud->par.dub[6]++;
 	}
-	i = -1;
-	while (++i < 7)
-		if (cud->par.dub[i] > 1)
-			return (dc_errmsg(i));
-	return (EXIT_SUCCESS);
 }
 
 int	scan_identifier(t_cud *cud, int i)
