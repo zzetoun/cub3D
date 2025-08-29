@@ -56,7 +56,8 @@ SRCS = cub3d.c 						\
        parser/parsing_utils.c 		\
        parser/xpm_parsing.c			\
 	   parser/color_parsing.c		\
-	   parser/map_parsing.c		\
+	   parser/map_parsing.c			\
+	   parser/map_parsing_utils.c	\
 	   formula/projection.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
