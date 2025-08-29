@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:46:59 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 13:08:59 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/29 19:29:33 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -103,6 +103,13 @@ typedef struct s_xpm
 	int		img_height;
 } t_xpm;
 
+typedef struct s_player
+{
+	int	facing;
+	int	idx;
+} t_player;
+
+
 /**
  * @brief Main map data.
  * title: Name of the map.
@@ -118,6 +125,7 @@ typedef struct s_map
 	bool			valid_map;
 	t_coordinate    **points;
 	t_xpm			xpms[4];
+	t_player		pl;
 } t_map;
 
 /**

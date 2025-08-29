@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:07:41 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 18:13:32 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/29 22:24:17 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -28,23 +28,24 @@ bool	line_is_space(char *line)
 
 void	double_parsing(t_cud *cud, char *data, int len)
 {
-	if (data[0] == 'N' && ft_strnstr(data, "NO", len))
+	if (!data)
+		return ;
+	if (data[0] == 'N' && ft_strnstr(data, "NO ", len))
 		cud->par.dub[NO]++;
-	else if (data[0] == 'S' && ft_strnstr(data, "EA", len))
+	else if (data[0] == 'E' && ft_strnstr(data, "EA ", len))
 		cud->par.dub[EA]++;
-	else if (data[0] == 'S' && ft_strnstr(data, "SO", len))
+	else if (data[0] == 'S' && ft_strnstr(data, "SO ", len))
 		cud->par.dub[SO]++;
-	else if (data[0] == 'W' && ft_strnstr(data, "WE", len))
+	else if (data[0] == 'W' && ft_strnstr(data, "WE ", len))
 		cud->par.dub[WE]++;
-	else if (data[0] == 'F')
+	else if (data[0] == 'F' && ft_strnstr(data, "F ", len))
 		cud->par.dub[F + 4]++;
-	else if (data[0] == 'C')
+	else if (data[0] == 'C' && ft_strnstr(data, "C ", len))
 		cud->par.dub[C + 4]++;
-	else if (data[0] == '1')
+	else if (ft_strchr(data, '1') || ft_strchr(data, '0'))
 	{
-		if (ft_strchr(data, 'N') || ft_strchr(data, 'E'))
-			cud->par.dub[6]++;
-		else if (ft_strchr(data, 'S') || ft_strchr(data, 'W'))
+		if (ft_strchr(data, 'N') || ft_strchr(data, 'E')
+			|| ft_strchr(data, 'S') || ft_strchr(data, 'W'))
 			cud->par.dub[6]++;
 	}
 }

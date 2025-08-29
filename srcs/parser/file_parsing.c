@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:11:02 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 18:05:02 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/29 22:25:12 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -14,17 +14,22 @@
 
 bool	double_check(t_cud *cud)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*line;
 
 	i = -1;
 	while (cud->par.data[++i])
 	{
 		j = 0;
-		while (ft_isspace(cud->par.data[i][j]))
+		while (cud->par.data[i] && line_is_space(cud->par.data[i]))
+			i++;
+		line = cud->par.data[i];
+		if (!line)
+			break ;
+		while (ft_isspace(line[j]))
 			j++;
-		if (cud->par.data[i][j])
-			double_parsing(cud, cud->par.data[i] + j, ft_strlen(cud->par.data[i] - j));
+		double_parsing(cud, line + j, ft_strlen(line) - j);
 	}
 	i = -1;
 	while (++i < 7)
@@ -66,7 +71,7 @@ bool	file_parsing(char *av, t_cud *cud)
 	cud->par.cub_fd = open(av, O_RDONLY);
 	if (cud->par.cub_fd < 0)
 		return (errmsg(av, strerror(errno)));
-	if (file_to_data(cud) || validate_map_pos(cud) || double_check(cud))
+	if (file_to_data(cud) || validate_map(cud) || double_check(cud))
 		return (EXIT_FAILURE);
 	if (fill_to_xpm(cud) || fill_to_color(cud))
 		return (EXIT_FAILURE);

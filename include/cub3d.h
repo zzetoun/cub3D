@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 17:59:56 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/29 12:12:30 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,7 +34,7 @@ bool    line_is_space(char *line);
 bool	fill_to_xpm(t_cud *cud);
 bool	fill_to_color(t_cud *cud);
 bool	double_check(t_cud *cud);
-bool	validate_map_pos(t_cud *cud);
+bool	validate_map(t_cud *cud);
 
 int		scan_identifier(t_cud *cud, int i);
 
@@ -61,7 +61,7 @@ void	freedom(t_cud *cud);
 # define COLORNULL "Color value is missing for"
 # define COLOROUT "Color value out of range (0-255) for"
 
-# define MAPERR "Invalid map configuration"
+# define MAPERR "Invalid Map configuration"
 # define MAPCHARERR "Map contains invalid characters"
 # define MAPBOUNDERR "Map is not properly surrounded by walls"
 # define MAPPLAYERERR "Map must contain exactly one player starting position"
