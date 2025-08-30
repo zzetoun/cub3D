@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:43:44 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 20:41:53 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 22:15:10 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -76,10 +76,10 @@ void	freedom(t_cud *cud)
 		ft_free_array(cud->par.data, 0);
 		cud->par.data = NULL;
 	}
-	if (cud->par.map)
+	if (cud->map.data)
 	{
-		ft_free_array(cud->par.map, 0);
-		cud->par.map = NULL;
+		ft_free_array(cud->map.data, 0);
+		cud->map.data = NULL;
 	}
 	free_dirs(cud);
 	free_xpms(cud);

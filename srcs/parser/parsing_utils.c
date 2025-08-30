@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:07:41 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 02:03:09 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 22:36:48 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -42,10 +42,9 @@ void	double_parsing(t_cud *cud, char *data, int len)
 		cud->par.dub[F + 4]++;
 	else if (data[0] == 'C' && ft_strnstr(data, "C", len))
 		cud->par.dub[C + 4]++;
-	else if (ft_strchr(data, '1') || ft_strchr(data, '0'))
+	else if (ft_strpbrk(data, "10"))
 	{
-		if (ft_strchr(data, 'N') || ft_strchr(data, 'E')
-			|| ft_strchr(data, 'S') || ft_strchr(data, 'W'))
+		if (ft_strpbrk(data, COORD))
 			cud->par.dub[6]++;
 	}
 }

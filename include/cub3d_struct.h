@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:46:59 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 20:40:42 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 23:33:49 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -106,7 +106,8 @@ typedef struct s_xpm
 typedef struct s_player
 {
 	int	facing;
-	int	idx;
+	int	x;
+	int	y;
 } t_player;
 
 
@@ -123,6 +124,7 @@ typedef struct s_map
 	const char		*title;
 	int				fc_colors[2][3];
 	bool			valid_map;
+	char			**data;
 	t_coordinate    **points;
 	t_xpm			xpms[4];
 	t_player		pl;
@@ -156,7 +158,6 @@ typedef struct s_par
 {
 	char	*dirs[4];
 	char	**data;
-	char	**map;
 	int		cub_fd;
 	int		dub[7];
 	int		id_idx[7];

@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 20:20:47 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 22:23:43 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,6 +30,7 @@ bool	errmsg(char *details, char *error);
 bool	dc_errmsg(int idx);
 bool	file_parsing(char *av, t_cud *cud);
 bool	file_format(char *file, char *format);
+bool	clean_up_empty_lines(t_cud *cud);
 bool    line_is_space(char *line);
 bool	elements_check(char *line);
 bool	fill_to_xpm(t_cud *cud);
@@ -45,6 +46,7 @@ void	double_parsing(t_cud *cud, char *data, int len);
 void	freedom(t_cud *cud);
 
 # define SPACES " \t\n\v\f\r"
+# define COORD "NESW"
 # define INPERR "No input file provided"
 # define ARGERR "Invalid number of arguments: usage ./cub3D <file_name>"
 # define MALLERR "Memory allocation failed: unexpected error occurred"

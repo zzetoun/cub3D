@@ -1,4 +1,4 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,9 +6,9 @@
 #    By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 17:24:30 by zzetoun           #+#    #+#              #
-#    Updated: 2025/08/16 17:29:10 by zzetoun          ###   ########.fr        #
+#    Updated: 2025/08/30 22:15:40 by zzetoun          ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 
 SRCS	= ft_array_len.c			\
@@ -27,6 +27,7 @@ SRCS	= ft_array_len.c			\
 		  ft_strchr.c				\
 		  ft_strnstr.c				\
 		  ft_strrchr.c				\
+		  ft_strpbrk.c				\
 		  ft_atoi.c					\
 		  ft_isalpha.c				\
 		  ft_isupper.c				\
@@ -54,7 +55,7 @@ SRCS	= ft_array_len.c			\
 		  ft_darray_to_str.c		\
 		  str_compare.c				\
 		  display/ft_printf.c		\
-		  gnl/get_next_line.c			
+		  gnl/get_next_line.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -66,8 +67,8 @@ SRCS_BO	= ft_lstnew.c		\
 		  ft_lstdelone.c	\
 		  ft_lstclear.c		\
 		  ft_lstiter.c		\
-		  ft_lstmap.c		
-		  
+		  ft_lstmap.c
+
 
 OBJS_BO	= ${SRCS_BO:.c=.o}
 
