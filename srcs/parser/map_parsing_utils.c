@@ -6,40 +6,11 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 00:21:44 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 19:12:14 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 21:03:04 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
-
-bool	clean_up_empty_lines(t_cud *cud)
-{
-	char	**tmp;
-	int		idx;
-	int		jdx;
-
-	idx = -1;
-	jdx = 0;
-	while (cud->par.data[++idx])
-		if (line_is_space(cud->par.data[idx]))
-			jdx++;
-	tmp = ft_calloc(idx - jdx + 1, sizeof(char *));
-	if (!tmp)
-		return (EXIT_FAILURE);
-	idx = -1;
-	jdx = 0;
-	while (cud->par.data[++idx])
-	{
-		if (!line_is_space(cud->par.data[idx]))
-			tmp[jdx++] = ft_strdup(cud->par.data[idx]);
-		if (!tmp[jdx - 1])
-			return (ft_free_array(tmp, 0), EXIT_FAILURE);
-	}
-	tmp[jdx] = '\0';
-	ft_free_array(cud->par.data, 0);
-	cud->par.data = tmp;
-	return (EXIT_SUCCESS);
-}
 
 bool	elements_check(char *line)
 {
@@ -68,7 +39,7 @@ bool	elements_check(char *line)
 	return (EXIT_SUCCESS);
 }
 
-bool	is_map(char *line)
+static	bool	is_map(char *line)
 {
 	int		idx;
 

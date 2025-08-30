@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:46:59 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/29 19:29:33 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 20:40:42 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -156,6 +156,7 @@ typedef struct s_par
 {
 	char	*dirs[4];
 	char	**data;
+	char	**map;
 	int		cub_fd;
 	int		dub[7];
 	int		id_idx[7];

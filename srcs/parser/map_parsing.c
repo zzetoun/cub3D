@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:11:35 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 19:16:51 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 20:44:50 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -109,6 +109,35 @@ static	bool	map_pos(t_cud *cud)
 	return (EXIT_SUCCESS);
 }
 
+static	bool	clean_up_empty_lines(t_cud *cud)
+{
+	char	**tmp;
+	int		idx;
+	int		jdx;
+
+	idx = -1;
+	jdx = 0;
+	while (cud->par.data[++idx])
+		if (line_is_space(cud->par.data[idx]))
+			jdx++;
+	tmp = ft_calloc(idx - jdx + 1, sizeof(char *));
+	if (!tmp)
+		return (EXIT_FAILURE);
+	idx = -1;
+	jdx = 0;
+	while (cud->par.data[++idx])
+	{
+		if (!line_is_space(cud->par.data[idx]))
+			tmp[jdx++] = ft_strdup(cud->par.data[idx]);
+		if (!tmp[jdx - 1])
+			return (ft_free_array(tmp, 0), EXIT_FAILURE);
+	}
+	tmp[jdx] = '\0';
+	ft_free_array(cud->par.data, 0);
+	cud->par.data = tmp;
+	return (EXIT_SUCCESS);
+}
+
 bool	validate_map(t_cud *cud)
 {
 	cud->map.pl.idx = scan_identifier(cud, -1);
@@ -124,7 +153,7 @@ bool	validate_map(t_cud *cud)
 		return (errmsg(MALLERR, NULL));
 	if (find_and_validate_player(cud))
 		return (errmsg(MAPERR, "Player Does not exists"));
-	// if (fill_map(cud))
-	// 	return (errmsg(MAPERR, NULL));
+	if (fill_map(cud))
+		return (errmsg(MAPERR, "FILL MAP"));
 	return (EXIT_SUCCESS);
 }
