@@ -6,11 +6,40 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 00:21:44 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 02:01:17 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 19:12:14 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
+
+bool	clean_up_empty_lines(t_cud *cud)
+{
+	char	**tmp;
+	int		idx;
+	int		jdx;
+
+	idx = -1;
+	jdx = 0;
+	while (cud->par.data[++idx])
+		if (line_is_space(cud->par.data[idx]))
+			jdx++;
+	tmp = ft_calloc(idx - jdx + 1, sizeof(char *));
+	if (!tmp)
+		return (EXIT_FAILURE);
+	idx = -1;
+	jdx = 0;
+	while (cud->par.data[++idx])
+	{
+		if (!line_is_space(cud->par.data[idx]))
+			tmp[jdx++] = ft_strdup(cud->par.data[idx]);
+		if (!tmp[jdx - 1])
+			return (ft_free_array(tmp, 0), EXIT_FAILURE);
+	}
+	tmp[jdx] = '\0';
+	ft_free_array(cud->par.data, 0);
+	cud->par.data = tmp;
+	return (EXIT_SUCCESS);
+}
 
 bool	elements_check(char *line)
 {
@@ -19,23 +48,22 @@ bool	elements_check(char *line)
 
 	len = ft_strlen(line);
 	idx = 0;
-	if (len > 1)
+	if (len == 1 && (*line != '1' || *line != '0'))
+		return (EXIT_FAILURE);
+	if (*line == '1' || *line == '0')
 	{
-		if (*line == '1' || *line == '0')
-		{
-			while (line[idx] && (line[idx] == '1' || line[idx] == '0'
+		while (line[idx] && (line[idx] == '1' || line[idx] == '0'
 				|| line[idx] == 'N' || line[idx] == 'W' || line[idx] == 'S'
-				|| line[idx] == 'E' || ft_isspace(line[idx])))
-				idx++;
-			if (line[idx] != '\0')
-				return (EXIT_FAILURE);
-		}
-		else if (!(ft_strnstr(line, "NO", len) || ft_strnstr(line, "EA", len)
-				|| ft_strnstr(line, "SO", len) || ft_strnstr(line, "WE", len)
-				|| ft_strnstr(line, "F ", len) || ft_strnstr(line, "C ", len)))
+				|| line[idx] == 'E'))
+			idx++;
+		while (ft_isspace(line[idx]))
+			idx++;
+		if (line[idx] != '\0')
 			return (EXIT_FAILURE);
 	}
-	else if (len == 1 && (*line != '1' || *line != '0'))
+	else if (!(ft_strnstr(line, "NO", len) || ft_strnstr(line, "EA", len)
+			|| ft_strnstr(line, "SO", len) || ft_strnstr(line, "WE", len)
+			|| ft_strnstr(line, "F ", len) || ft_strnstr(line, "C ", len)))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -46,9 +74,9 @@ bool	is_map(char *line)
 
 	idx = 0;
 	while (line[idx] && ft_isspace(line[idx]))
-			idx++;
+		idx++;
 	if (line[idx] && (line[idx] == '0' || line[idx] == '1'))
-			return (true);
+		return (true);
 	return (false);
 }
 
@@ -56,12 +84,9 @@ int	scan_identifier(t_cud *cud, int i)
 {
 	int	len;
 
+	cud->par.id_idx[6] = -1;
 	while (cud->par.data[++i])
 	{
-		while (cud->par.data[i] && line_is_space(cud->par.data[i]))
-			i++;
-		if (!cud->par.data[i])
-			return (cud->par.id_idx[6]);
 		len = ft_strlen(cud->par.data[i]);
 		if (ft_strnstr(cud->par.data[i], "NO", len))
 			cud->par.id_idx[NO] = i;

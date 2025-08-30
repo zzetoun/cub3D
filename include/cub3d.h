@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 01:01:53 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 18:23:01 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,6 +37,7 @@ bool	fill_to_xpm(t_cud *cud);
 bool	fill_to_color(t_cud *cud);
 bool	double_check(t_cud *cud);
 bool	validate_map(t_cud *cud);
+bool	clean_up_empty_lines(t_cud *cud);
 
 int		scan_identifier(t_cud *cud, int i);
 

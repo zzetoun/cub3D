@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:07:04 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/29 19:11:12 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 18:46:29 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -73,10 +73,6 @@ bool	fill_to_xpm(t_cud *cud)
 	while (cud->par.data[++i])
 	{
 		j = 0;
-		while (cud->par.data[i] && line_is_space(cud->par.data[i]))
-			i++;
-		if (!cud->par.data[i])
-			return (dir_to_xpm(cud));
 		while (ft_isspace((unsigned char)cud->par.data[i][j]))
 			j++;
 		if (!cud->par.data[i] || ft_strlen(cud->par.data[i]) - j < 7)

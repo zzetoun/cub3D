@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:11:02 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/29 22:25:12 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 18:47:30 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,8 +22,6 @@ bool	double_check(t_cud *cud)
 	while (cud->par.data[++i])
 	{
 		j = 0;
-		while (cud->par.data[i] && line_is_space(cud->par.data[i]))
-			i++;
 		line = cud->par.data[i];
 		if (!line)
 			break ;

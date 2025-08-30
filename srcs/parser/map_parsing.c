@@ -6,13 +6,11 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:11:35 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 01:53:23 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/30 19:16:51 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub3d.h"
-
-
 
 static	bool	valid_elements(t_cud *cud)
 {
@@ -41,6 +39,7 @@ static	bool	find_and_validate_player(t_cud *cud)
 {
 	char	*line;
 
+	cud->map.pl.idx = scan_identifier(cud, -1);
 	cud->map.pl.facing = -1;
 	while (cud->par.data[cud->map.pl.idx])
 	{
@@ -91,18 +90,20 @@ static	bool	single_map(t_cud *cud)
 
 static	bool	map_pos(t_cud *cud)
 {
-	int idx;
-	int	id;
-	int	map_id;
+	int		idx;
+	int		i;
+	int		map_id;
+	char	*s;
 
 	idx = -1;
 	map_id = cud->map.pl.idx;
+	s = cud->par.data[cud->map.pl.idx];
 	while (++idx < 7)
 	{
-		id = cud->par.id_idx[idx];
-		if (id != -1 && map_id < id && ft_strchr(cud->par.data[map_id], '1'))
+		i = cud->par.id_idx[idx];
+		if (i != -1 && map_id < i && (ft_strchr(s, '1') || ft_strchr(s, '0')))
 			return (errmsg(MAPERR, "Map should be after identifiers"));
-		else if (id != -1 && map_id < id)
+		else if (i != -1 && map_id < i)
 			return (errmsg(MAPERR, NULL));
 	}
 	return (EXIT_SUCCESS);
@@ -116,12 +117,14 @@ bool	validate_map(t_cud *cud)
 	if (map_pos(cud))
 		return (EXIT_FAILURE);
 	if (valid_elements(cud))
-		return (errmsg(MAPERR, "Map has illegal elements"));
+		return (errmsg(MAPERR, "Map has illegal elements or not connected"));
 	if (single_map(cud))
 		return (errmsg(MAPERR, "there is more than 1 map"));
+	if (clean_up_empty_lines(cud))
+		return (errmsg(MALLERR, NULL));
 	if (find_and_validate_player(cud))
 		return (errmsg(MAPERR, "Player Does not exists"));
-	// if (valid_elements(cud) || fill_map(cud, map_id))
+	// if (fill_map(cud))
 	// 	return (errmsg(MAPERR, NULL));
 	return (EXIT_SUCCESS);
 }
