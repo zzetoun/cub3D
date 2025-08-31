@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:46:59 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 23:33:49 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/31 17:24:49 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -124,6 +124,8 @@ typedef struct s_map
 	const char		*title;
 	int				fc_colors[2][3];
 	bool			valid_map;
+	int				height;
+	int				width;
 	char			**data;
 	t_coordinate    **points;
 	t_xpm			xpms[4];

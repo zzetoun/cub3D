@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 22:23:43 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/31 17:55:08 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -68,8 +68,6 @@ void	freedom(t_cud *cud);
 # define MAPERR "Invalid Map configuration"
 # define MAPCHARERR "Map contains invalid characters"
 # define MAPBOUNDERR "Map is not properly surrounded by walls"
-# define MAPPLAYERERR "Map must contain exactly one player starting position"
-# define MAPMULTIPLAYER "Multiple player positions detected"
 # define MAPEMPTYERR "Map is missing or empty"
 # define MAPSPACEERR "Map contains unexpected empty spaces"
 

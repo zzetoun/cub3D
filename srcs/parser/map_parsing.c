@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:11:35 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 23:48:54 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/31 17:54:48 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -117,7 +117,7 @@ bool	validate_map(t_cud *cud)
 	if (map_pos(cud))
 		return (EXIT_FAILURE);
 	if (valid_elements(cud))
-		return (errmsg(MAPERR, "Map has illegal elements or not connected"));
+		return (errmsg(MAPCHARERR, "or not connected"));
 	if (single_map(cud))
 		return (errmsg(MAPERR, "there is more than 1 map"));
 	if (clean_up_empty_lines(cud))
@@ -125,6 +125,6 @@ bool	validate_map(t_cud *cud)
 	if (find_and_validate_player(cud))
 		return (errmsg(MAPERR, "Player Does not exists"));
 	if (fill_map(cud))
-		return (errmsg(MAPERR, "FILL MAP"));
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

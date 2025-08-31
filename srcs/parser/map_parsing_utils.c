@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 00:21:44 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 22:29:58 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/08/31 17:41:41 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -72,7 +72,7 @@ bool	clean_up_empty_lines(t_cud *cud)
 		if (!tmp[jdx - 1])
 			return (ft_free_array(tmp, 0), EXIT_FAILURE);
 	}
-	tmp[jdx] = '\0';
+	tmp[jdx] = NULL;
 	ft_free_array(cud->par.data, 0);
 	cud->par.data = tmp;
 	return (EXIT_SUCCESS);
