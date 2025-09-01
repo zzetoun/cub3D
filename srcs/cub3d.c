@@ -89,7 +89,8 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 	}
 	// here to add excution
-	test_print_cud(&cud);
+	// test_print_cud(&cud);
+	printf("Done\n");
 	freedom(&cud);
 	return (EXIT_SUCCESS);
 }

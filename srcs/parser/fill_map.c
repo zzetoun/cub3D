@@ -36,80 +36,64 @@ static	bool	clean_and_create_map(t_cud *cud)
 	while (cud->map.data[cud->map.pl.y][++i])
 		if (ft_strchr(COORD, cud->map.data[cud->map.pl.y][i]))
 			cud->map.pl.x = i;
-	return (EXIT_SUCCESS);
-}
-
-static	char	**copy_map(t_cud *cud)
-{
-	char	**copy_map;
-	int		idx;
-	int		len;
-
-	cud->map.height = ft_array_len(cud->map.data);
-	copy_map = ft_calloc(cud->map.height + 1, sizeof(char *));
-	if (!copy_map)
-		return (NULL);
-	idx = -1;
+	int idx = -1;
+	int jdx;
 	while (cud->map.data[++idx])
 	{
-		copy_map[idx] = ft_strdup(cud->map.data[idx]);
-		if (!copy_map[idx])
+		// ft_printf(1, "cud->map.data[%d]=[%s]", idx, cud->map.data[idx]);
+		jdx = 0;
+		while (cud->map.data[idx][jdx])
 		{
-			ft_free_array(copy_map, 0);
-			return (NULL);
+			if (cud->map.data[idx][jdx] != '1' && cud->map.data[idx][jdx] != '0')
+				ft_printf(1, "\ncud->map.data[%d][%d]=[%d]", idx, jdx , cud->map.data[idx][jdx]);
+			jdx++;
 		}
-		len = ft_strlen(cud->map.data[idx]);
-		if (cud->map.width < len)
-			cud->map.width = len;
 	}
-	copy_map[idx] = NULL;
-	return (copy_map);
-}
-
-static bool	fill_area(char **tab, int row, int col, int w, int h)
-{
-	if (row < 0 || col < 0 || row >= h || col >= w)
-		return (EXIT_FAILURE);
-	if (col >= (int)ft_strlen(tab[row]))
-		return (EXIT_FAILURE);
-	if (tab[row][col] == '1' || tab[row][col] == 'X')
-		return (EXIT_SUCCESS);
-	if (tab[row][col] == ' ')
-		return (EXIT_FAILURE);
-	if (tab[row][col] != '0' && tab[row][col] != 'N'
-		&& tab[row][col] != 'S' && tab[row][col] != 'E'
-		&& tab[row][col] != 'W')
-		return (EXIT_SUCCESS);
-	tab[row][col] = 'X';
-	if (fill_area(tab, row - 1, col, w, h))
-		return (EXIT_FAILURE);
-	if (fill_area(tab, row + 1, col, w, h))
-		return (EXIT_FAILURE);
-	if (fill_area(tab, row, col - 1, w, h))
-		return (EXIT_FAILURE);
-	if (fill_area(tab, row, col + 1, w, h))
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
-static bool	flood_fill_check(char **tab, int x, int y, int w, int h)
+static bool	check_top_or_bottom(char **map_tab, int i, int j)
 {
-	return (fill_area(tab, y, x, w, h));
+	if (!map_tab || !map_tab[i] || !map_tab[i][j])
+		return (EXIT_FAILURE);
+	while (ft_isspace(map_tab[i][j]))
+		j++;
+	while (map_tab[i][j])
+	{
+		// ft_printf(1, "map_tab[%d][%d]=[%c]\n", i,j,map_tab[i][j]);
+		if (map_tab[i][j] != '1')
+			return (EXIT_FAILURE);
+		j++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static	bool	check_map_sides(t_cud *cud, char **map_tab)
+{
+	int	i;
+	int	j;
+
+	if (check_top_or_bottom(map_tab, 0, 0))
+		return (EXIT_FAILURE);
+	i = 1;
+	while (i < cud->map.height - 1)
+	{
+		j = ft_strlen(map_tab[i]) - 1;
+		// ft_printf(1, "map_tab[%d][%d]=[%c]\n", i,j,map_tab[i][j]);
+		if (map_tab[i][j] != '1')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	if (check_top_or_bottom(map_tab, i, 0))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 bool	fill_map(t_cud *cud)
 {
-	char	**tmp_map;
-
 	if (clean_and_create_map(cud))
 		return (EXIT_FAILURE);
-	tmp_map = copy_map(cud);
-	if (!tmp_map)
-		return (errmsg(MALLERR, NULL));
-	cud->map.valid_map = flood_fill_check(tmp_map, cud->map.pl.x,
-		cud->map.pl.y, cud->map.width, cud->map.height);
-	ft_free_array(tmp_map, 0);
-	if (cud->map.valid_map)
+	if (check_map_sides(cud, cud->map.data))
 		return (errmsg(MAPBOUNDERR, NULL));
 	return (EXIT_SUCCESS);
 }
