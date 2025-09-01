@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:11:02 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 18:47:30 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/01 22:26:54 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -57,6 +57,8 @@ bool	file_to_data(t_cud *cud)
 	free(line);
 	if (!cud->par.data)
 		return (errmsg(MALLERR, NULL));
+	if (trim_end_space(cud))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

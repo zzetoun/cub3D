@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:07:41 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 22:36:48 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/01 22:31:55 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -58,5 +58,33 @@ bool	file_format(char *file, char *format)
 		return (errmsg(FILTYPE, format));
 	if (!str_compare(format, file + idx))
 		return (errmsg(FILNAME, format));
+	return (EXIT_SUCCESS);
+}
+bool	trim_end_space(t_cud *cud)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = -1;
+	while (cud->par.data[++i])
+	{
+		if (line_is_space(cud->par.data[i]))
+			continue ;
+		j = ft_strlen(cud->par.data[i]) - 1;
+		while (j >= 0 && ft_isspace((unsigned char)cud->par.data[i][j]))
+			j--;
+		tmp = ft_strdup(cud->par.data[i]);
+		if (!tmp)
+			return (errmsg(MALLERR, NULL));
+		free(cud->par.data[i]);
+		cud->par.data[i] = ft_substr(tmp, 0, j + 1);
+		if (!cud->par.data[i])
+		{
+			free(tmp);
+			return (errmsg(MALLERR, NULL));
+		}
+		free(tmp);
+	}
 	return (EXIT_SUCCESS);
 }

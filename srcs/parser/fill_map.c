@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 20:19:32 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/31 17:58:23 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/01 22:38:24 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -36,19 +36,7 @@ static	bool	clean_and_create_map(t_cud *cud)
 	while (cud->map.data[cud->map.pl.y][++i])
 		if (ft_strchr(COORD, cud->map.data[cud->map.pl.y][i]))
 			cud->map.pl.x = i;
-	int idx = -1;
-	int jdx;
-	while (cud->map.data[++idx])
-	{
-		// ft_printf(1, "cud->map.data[%d]=[%s]", idx, cud->map.data[idx]);
-		jdx = 0;
-		while (cud->map.data[idx][jdx])
-		{
-			if (cud->map.data[idx][jdx] != '1' && cud->map.data[idx][jdx] != '0')
-				ft_printf(1, "\ncud->map.data[%d][%d]=[%d]", idx, jdx , cud->map.data[idx][jdx]);
-			jdx++;
-		}
-	}
+	cud->map.height = ft_array_len(cud->map.data);
 	return (EXIT_SUCCESS);
 }
 
@@ -60,7 +48,6 @@ static bool	check_top_or_bottom(char **map_tab, int i, int j)
 		j++;
 	while (map_tab[i][j])
 	{
-		// ft_printf(1, "map_tab[%d][%d]=[%c]\n", i,j,map_tab[i][j]);
 		if (map_tab[i][j] != '1')
 			return (EXIT_FAILURE);
 		j++;
@@ -79,7 +66,6 @@ static	bool	check_map_sides(t_cud *cud, char **map_tab)
 	while (i < cud->map.height - 1)
 	{
 		j = ft_strlen(map_tab[i]) - 1;
-		// ft_printf(1, "map_tab[%d][%d]=[%c]\n", i,j,map_tab[i][j]);
 		if (map_tab[i][j] != '1')
 			return (EXIT_FAILURE);
 		i++;

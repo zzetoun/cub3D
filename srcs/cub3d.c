@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/28 13:21:38 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/01 22:29:07 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -89,7 +89,7 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 	}
 	// here to add excution
-	// test_print_cud(&cud);
+	test_print_cud(&cud);
 	printf("Done\n");
 	freedom(&cud);
 	return (EXIT_SUCCESS);

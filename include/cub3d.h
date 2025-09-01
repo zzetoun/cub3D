@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/31 17:55:08 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/01 22:26:39 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -33,6 +33,7 @@ bool	file_format(char *file, char *format);
 bool	clean_up_empty_lines(t_cud *cud);
 bool    line_is_space(char *line);
 bool	elements_check(char *line);
+bool	trim_end_space(t_cud *cud);
 bool	fill_to_xpm(t_cud *cud);
 bool	fill_to_color(t_cud *cud);
 bool	double_check(t_cud *cud);
