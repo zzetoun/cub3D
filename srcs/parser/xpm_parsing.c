@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   xpm_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 19:07:04 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/08/30 18:46:29 by zzetoun          ###   ########.fr       */
+/*   Created: 2025/09/04 20:58:52 by zzetoun           #+#    #+#             */
+/*   Updated: 2025/09/04 20:58:52 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -16,6 +16,9 @@ static bool	xpm_to_image(t_cud *cud)
 {
 	t_par	par;
 
+	cud->mlx = mlx_init();
+	if (!cud->mlx)
+		return (errmsg(MLXINIERR, NULL));
 	par = cud->par;
 	cud->map.xpms[NO].xpm_file = mlx_xpm_file_to_image(cud->mlx, par.dirs[NO],
 			&cud->map.xpms[NO].img_width, &cud->map.xpms[NO].img_height);

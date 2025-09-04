@@ -80,9 +80,6 @@ int	main(int ac, char **av)
 		return (errmsg(ARGERR, NULL));
 	ft_memset(&cud, '\0', sizeof(cud));
     ft_memset(cud.par.id_idx, -1, sizeof(cud.par.id_idx));
-	cud.mlx = mlx_init();
-	if (!cud.mlx)
-		return (errmsg(MLXINIERR, NULL));
 	if (file_parsing(av[1], &cud))
 	{
 		freedom(&cud);
