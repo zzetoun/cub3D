@@ -29,6 +29,7 @@
 bool	errmsg(char *details, char *error);
 bool	dc_errmsg(int idx);
 bool	file_parsing(char *av, t_cud *cud);
+bool	open_file(char *av, t_cud *cud);
 bool	file_format(char *file, char *format);
 bool	clean_up_empty_lines(t_cud *cud);
 bool    line_is_space(char *line);

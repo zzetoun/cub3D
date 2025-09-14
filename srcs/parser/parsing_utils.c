@@ -89,3 +89,16 @@ bool	trim_end_space(t_cud *cud)
 	}
 	return (EXIT_SUCCESS);
 }
+bool	open_file(char *av, t_cud *cud)
+{
+	if (cud->par.cub_fd != -1)
+	{
+		close(cud->par.cub_fd);
+		cud->par.cub_fd = -1;
+	}
+	if (cud->par.cub_fd == -1)
+		cud->par.cub_fd = open(av, O_RDONLY);
+	if (cud->par.cub_fd < 0)
+		return (errmsg(av, strerror(errno)));
+	return (EXIT_SUCCESS);
+}

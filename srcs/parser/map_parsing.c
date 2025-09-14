@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 20:58:25 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/09/04 20:58:28 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/14 12:35:26 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static	bool	single_map(t_cud *cud)
 	}
 	if (s_idx == -1)
 		return (EXIT_SUCCESS);
-	else if (idx - s_idx > 1)
+	else if (idx - s_idx != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -116,10 +116,12 @@ bool	validate_map(t_cud *cud)
 		return (errmsg(MAPERR, "Map Not found"));
 	if (map_pos(cud))
 		return (EXIT_FAILURE);
-	if (valid_elements(cud))
-		return (errmsg(MAPCHARERR, "or not connected"));
 	if (single_map(cud))
-		return (errmsg(MAPERR, "there is more than 1 map"));
+			return (errmsg(MAPERR, "there is more than 1 map"));
+	if (trim_end_space(cud))
+		return (EXIT_FAILURE);
+	if (valid_elements(cud))
+		return (errmsg(MAPCHARERR, NULL));
 	if (clean_up_empty_lines(cud))
 		return (errmsg(MALLERR, NULL));
 	if (find_and_validate_player(cud))

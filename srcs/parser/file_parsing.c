@@ -12,6 +12,29 @@
 
 #include "cub3d.h"
 
+static	int	line_counter(t_cud *cud)
+{
+	char	*tmp;
+	int		counter;
+
+	tmp = gnl(cud->par.cub_fd);
+	if (!tmp)
+	{
+		errmsg(FILEEMPTY, NULL);
+		return (0);
+	}
+	counter = 1;
+	while (tmp)
+	{
+		free(tmp);
+		tmp = NULL;
+		tmp = gnl(cud->par.cub_fd);
+		if (tmp)
+			counter++;
+	}
+	return (counter);
+}
+
 bool	double_check(t_cud *cud)
 {
 	int		i;
@@ -36,29 +59,27 @@ bool	double_check(t_cud *cud)
 	return (EXIT_SUCCESS);
 }
 
-bool	file_to_data(t_cud *cud)
+bool	file_to_data(t_cud *cud, char *av)
 {
-	char	*tmp;
-	char	*line;
+	int		counter;
+	int		idx;
 
-	tmp = gnl(cud->par.cub_fd);
-	if (!tmp)
-		return (errmsg(FILEEMPTY, NULL));
-	line = NULL;
-	line = ft_strjoin(line, tmp);
-	while (tmp)
-	{
-		free(tmp);
-		tmp = NULL;
-		tmp = gnl(cud->par.cub_fd);
-		line = ft_strjoin_free(line, tmp);
-	}
-	cud->par.data = ft_split(line, '\n');
-	free(line);
+	counter = line_counter(cud);
+	if (!counter)
+		return (EXIT_FAILURE);
+	cud->par.data = ft_calloc(counter + 1, sizeof(char *));
 	if (!cud->par.data)
 		return (errmsg(MALLERR, NULL));
-	if (trim_end_space(cud))
+	if (open_file(av, cud))
 		return (EXIT_FAILURE);
+	idx = 0;
+	while (idx < counter)
+	{
+		cud->par.data[idx++] = gnl(cud->par.cub_fd);
+		if (!cud->par.data[idx])
+			return (errmsg(MALLERR, NULL));
+	}
+	cud->par.data[idx] = NULL;
 	return (EXIT_SUCCESS);
 }
 
@@ -68,10 +89,9 @@ bool	file_parsing(char *av, t_cud *cud)
 		return (errmsg(INPERR, NULL));
 	if (file_format(av, ".cub"))
 		return (EXIT_FAILURE);
-	cud->par.cub_fd = open(av, O_RDONLY);
-	if (cud->par.cub_fd < 0)
-		return (errmsg(av, strerror(errno)));
-	if (file_to_data(cud) || validate_map(cud) || double_check(cud))
+	if (open_file(av, cud))
+		return (EXIT_FAILURE);
+	if (file_to_data(cud, av) || validate_map(cud) || double_check(cud))
 		return (EXIT_FAILURE);
 	if (fill_to_xpm(cud) || fill_to_color(cud))
 		return (EXIT_FAILURE);

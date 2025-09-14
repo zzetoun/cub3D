@@ -24,27 +24,25 @@ static	bool	is_map(char *line)
 	return (false);
 }
 
-bool	elements_check(char *line)
+bool	elements_check(char *s)
 {
 	int	len;
 	int	idx;
 
-	len = ft_strlen(line);
+	len = ft_strlen(s);
 	idx = 0;
-	if (len == 1 && ft_strchr("10", line[idx]))
+	if (len == 1 && !ft_strchr("10", s[idx]))
 		return (EXIT_FAILURE);
-	if (ft_strchr("10", line[idx]))
+	if (ft_strchr("10", s[idx]))
 	{
-		while (line[idx] && ft_strchr("10NESW", line[idx]))
+		while (s[idx] && ft_strchr("10NESW ", s[idx]))
 			idx++;
-		while (ft_isspace(line[idx]))
-			idx++;
-		if (line[idx] != '\0')
+		if (s[idx] != '\0')
 			return (EXIT_FAILURE);
 	}
-	else if (!(ft_strnstr(line, "NO", len) || ft_strnstr(line, "EA", len)
-			|| ft_strnstr(line, "SO", len) || ft_strnstr(line, "WE", len)
-			|| ft_strnstr(line, "F ", len) || ft_strnstr(line, "C ", len)))
+	else if (!(ft_strnstr(s, "NO ", len) || ft_strnstr(s, "EA ", len)
+			|| ft_strnstr(s, "SO ", len) || ft_strnstr(s, "WE ", len)
+			|| ft_strnstr(s, "F ", len) || ft_strnstr(s, "C ", len)))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

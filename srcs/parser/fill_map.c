@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+// static	bool	wall_around(int i, int j, int len)
+// {
+// 	if (len == 1)
+// 		return (EXIT_FAILURE);
+// 	if (len = j + 1)
+
+// }
+
 static	bool	clean_and_create_map(t_cud *cud)
 {
 	int		len;
@@ -48,6 +56,8 @@ static bool	check_top_or_bottom(char **map_tab, int i, int j)
 		j++;
 	while (map_tab[i][j])
 	{
+		// if (map_tab[i][j] == ' ' && wall_around(i, j, ft_array_len(map_tab)))
+		// 	return (EXIT_FAILURE);
 		if (map_tab[i][j] != '1')
 			return (EXIT_FAILURE);
 		j++;
