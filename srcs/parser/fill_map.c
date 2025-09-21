@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
@@ -6,19 +6,46 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 20:58:19 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/09/04 20:58:19 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/14 16:58:28 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
-// static	bool	wall_around(int i, int j, int len)
-// {
-// 	if (len == 1)
-// 		return (EXIT_FAILURE);
-// 	if (len = j + 1)
+static bool    wall_around(char c, t_cud *cud, int i, int j)
+{
+	char	**d;
 
-// }
+	d = cud->map.data;
+    if (c == '0')
+    {
+        if (i == 0)
+            return (EXIT_FAILURE);
+        if (j >= ft_strlen(d[i - 1]) || !ft_strchr(FULL, d[i - 1][j]))
+            return (EXIT_FAILURE);
+        if (i >= cud->map.height - 1)
+            return (EXIT_FAILURE);
+        if (j >= ft_strlen(d[i + 1]) || !ft_strchr(FULL, d[i + 1][j]))
+            return (EXIT_FAILURE);
+        if (j == 0 || !ft_strchr(FULL, d[i][j - 1]))
+            return (EXIT_FAILURE);
+        if (j >= ft_strlen(d[i]) - 1 || !ft_strchr(FULL, d[i][j + 1]))
+            return (EXIT_FAILURE);
+    }
+    else if (c == ' ')
+    {
+        if (i > 0 && j < ft_strlen(d[i - 1]) && !ft_strchr("1 ", d[i - 1][j]))
+            return (EXIT_FAILURE);
+        if (i < cud->map.height - 1 && j < ft_strlen(d[i + 1]) &&
+            !ft_strchr("1 ", d[i + 1][j]))
+            return (EXIT_FAILURE);
+        if (j > 0 && !ft_strchr("1 ", d[i][j - 1]))
+            return (EXIT_FAILURE);
+        if (j < ft_strlen(d[i]) - 1 && !ft_strchr("1 ", d[i][j + 1]))
+            return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
+}
 
 static	bool	clean_and_create_map(t_cud *cud)
 {
@@ -48,40 +75,23 @@ static	bool	clean_and_create_map(t_cud *cud)
 	return (EXIT_SUCCESS);
 }
 
-static bool	check_top_or_bottom(char **map_tab, int i, int j)
+static	bool	check_map_border(t_cud *cud, char **map_tab)
 {
-	if (!map_tab || !map_tab[i] || !map_tab[i][j])
-		return (EXIT_FAILURE);
-	while (ft_isspace(map_tab[i][j]))
-		j++;
-	while (map_tab[i][j])
+	int		i;
+	int		j;
+	char	c;
+
+	i = -1;
+	while(map_tab[++i])
 	{
-		// if (map_tab[i][j] == ' ' && wall_around(i, j, ft_array_len(map_tab)))
-		// 	return (EXIT_FAILURE);
-		if (map_tab[i][j] != '1')
+		j = 0;
+		c = map_tab[i][j];
+		if (c == '0' && wall_around(c, cud, i, j))
+			return (EXIT_FAILURE);
+		else if (ft_isspace(c) && wall_around(c, cud, i, j))
 			return (EXIT_FAILURE);
 		j++;
 	}
-	return (EXIT_SUCCESS);
-}
-
-static	bool	check_map_sides(t_cud *cud, char **map_tab)
-{
-	int	i;
-	int	j;
-
-	if (check_top_or_bottom(map_tab, 0, 0))
-		return (EXIT_FAILURE);
-	i = 1;
-	while (i < cud->map.height - 1)
-	{
-		j = ft_strlen(map_tab[i]) - 1;
-		if (map_tab[i][j] != '1')
-			return (EXIT_FAILURE);
-		i++;
-	}
-	if (check_top_or_bottom(map_tab, i, 0))
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -89,7 +99,9 @@ bool	fill_map(t_cud *cud)
 {
 	if (clean_and_create_map(cud))
 		return (EXIT_FAILURE);
-	if (check_map_sides(cud, cud->map.data))
+	if (cud->map.height < 3)
+		return (errmsg(MAPERR, "Map is too small"));
+	if (check_map_border(cud, cud->map.data))
 		return (errmsg(MAPBOUNDERR, NULL));
 	return (EXIT_SUCCESS);
 }

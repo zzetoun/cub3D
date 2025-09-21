@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:56:01 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/09/01 22:29:07 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/14 16:30:22 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -80,6 +80,7 @@ int	main(int ac, char **av)
 		return (errmsg(ARGERR, NULL));
 	ft_memset(&cud, '\0', sizeof(cud));
     ft_memset(cud.par.id_idx, -1, sizeof(cud.par.id_idx));
+	cud.par.cub_fd = -1;
 	if (file_parsing(av[1], &cud))
 	{
 		freedom(&cud);
