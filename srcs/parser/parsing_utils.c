@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 20:58:46 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/09/14 16:31:22 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/28 15:09:40 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -89,6 +89,7 @@ bool	trim_end_space(t_cud *cud)
 	}
 	return (EXIT_SUCCESS);
 }
+
 bool	open_file(char *av, t_cud *cud)
 {
 	if (cud->par.cub_fd != -1)

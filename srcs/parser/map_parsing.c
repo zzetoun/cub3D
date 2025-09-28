@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 20:58:25 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/09/14 12:35:26 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/28 14:46:11 by zzetoun          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3d.h"
 
@@ -117,7 +117,7 @@ bool	validate_map(t_cud *cud)
 	if (map_pos(cud))
 		return (EXIT_FAILURE);
 	if (single_map(cud))
-			return (errmsg(MAPERR, "there is more than 1 map"));
+		return (errmsg(MAPERR, "there is more than 1 map"));
 	if (trim_end_space(cud))
 		return (EXIT_FAILURE);
 	if (valid_elements(cud))

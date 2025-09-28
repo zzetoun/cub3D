@@ -6,7 +6,7 @@
 /*   By: zzetoun <zzetoun@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:44:45 by zzetoun           #+#    #+#             */
-/*   Updated: 2025/09/14 16:57:58 by zzetoun          ###   ########.fr       */
+/*   Updated: 2025/09/28 14:39:27 by zzetoun          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -49,7 +49,7 @@ void	freedom(t_cud *cud);
 
 # define SPACES " \t\n\v\f\r"
 # define COORD "NESW"
-# define FULL "01NESW"
+# define WOW "01NESW"
 # define INPERR "No input file provided"
 # define ARGERR "Invalid number of arguments: usage ./cub3D <file_name>"
 # define MALLERR "Memory allocation failed: unexpected error occurred"

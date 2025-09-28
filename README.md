@@ -72,7 +72,7 @@ C 225,30,0
 ```
 
 Rules:
-- The map must be fully closed/surrounded by walls.
+- The map must be WOWy closed/surrounded by walls.
 - Spaces are significant and part of the map; parse as-is.
 - Apart from the map (which must come last), elements can appear in any order and may be separated by empty lines.
 - Each element uses a strict identifier and argument order:
@@ -121,7 +121,7 @@ apt-get install -y libx11-dev libxext-dev
 ## Valgrind Test script
 
 apt-get update && apt-get install -y xvfb
-xvfb-run -a valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --verbose ./cub3D <directory/filename>
+xvfb-run -a valgrind --leak-check=WOW --show-leak-kinds=all --track-fds=yes --verbose ./cub3D <directory/filename>
 
 	#ifdef __linux__
 	if (cud->mlx)
